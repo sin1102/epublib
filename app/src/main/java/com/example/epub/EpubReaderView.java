@@ -424,12 +424,15 @@ public class EpubReaderView extends WebView {
             Log.e("error", e.getMessage());
         }
     }
-    public void OpenEpubFile() {
+    public void OpenEpubFile(String epub_location) {
         InputStream epubInputStream = null;
         try {
-            AssetManager assetManager = context.getAssets();
-            epubInputStream = assetManager.open("testbook1.epub");
+
+            epubInputStream = new BufferedInputStream(new FileInputStream(epub_location));
             this.book = (new EpubReader()).readEpub(epubInputStream);
+//            AssetManager assetManager = context.getAssets();
+//            epubInputStream = assetManager.open("testbook1.epub");
+//            this.book = (new EpubReader()).readEpub(epubInputStream);
             String epub_temp_extraction_location = context.getCacheDir() + "/tempfiles";
             deleteFiles(new File(epub_temp_extraction_location));
             if (!new File(epub_temp_extraction_location).exists())

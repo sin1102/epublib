@@ -37,7 +37,7 @@ public class Reader extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reader);
         context = this;
-        //String epub_location = this.getIntent().getExtras().getString("epub_location");
+        String epub_location = this.getIntent().getExtras().getString("epub_location");
         ePubReader = (EpubReaderView) findViewById(R.id.epub_reader);
         show_toc = (ImageView) findViewById(R.id.show_toc);
         read_aloud = (ImageView) findViewById(R.id.read_aloud);
@@ -52,7 +52,7 @@ public class Reader extends AppCompatActivity {
         select_search = (ImageView) findViewById(R.id.select_search);
         select_share = (ImageView) findViewById(R.id.select_share);
         select_exit = (ImageView) findViewById(R.id.select_exit);
-        ePubReader.OpenEpubFile();
+        ePubReader.OpenEpubFile(epub_location);
         ePubReader.GotoPosition(0, (float) 0);
         ePubReader.setEpubReaderListener(new EpubReaderView.EpubReaderListener() {
             @Override
