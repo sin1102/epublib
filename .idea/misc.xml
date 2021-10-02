@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+=======
+        <entry key="..\:/Users/Admin/Music/epublib/app/src/main/res/layout/activity_book_loader.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/Music/epublib/app/src/main/res/layout/activity_display1.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Music/epublib/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/Music/epublib/app/src/main/res/layout/activity_reader.xml" value="0.25416666666666665" />
+>>>>>>> 11f866a6c37042b3a42cb0a35d2d23887817c7ac
       </map>
     </option>
   </component>

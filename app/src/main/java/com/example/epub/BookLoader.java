@@ -27,7 +27,7 @@ public class BookLoader extends AppCompatActivity {
     }
     public void OpenFileManager(){
         ExFilePicker exFilePicker = new ExFilePicker();
-        exFilePicker.setStartDirectory("/storage/self/primary/MEGA/MEGA Downloads");
+        exFilePicker.setStartDirectory("/storage/self/primary");
         exFilePicker.setCanChooseOnlyOneItem(true);
         //exFilePicker.setShowOnlyExtensions("epub");
         exFilePicker.setQuitButtonEnabled(true);
