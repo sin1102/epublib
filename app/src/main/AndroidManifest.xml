@@ -37,10 +37,10 @@
             android:name=".Reader"
             android:exported="true" />
         <activity
-            android:name=".BookLoader"
+            android:name="BookLoader"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="MainActivity"
             android:exported="true" />
     </application>
 
