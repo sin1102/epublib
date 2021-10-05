@@ -16,13 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Epub">
         <activity
-            android:name=".Display1"
-            android:exported="true" />
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:parentActivityName=".SideBar"
+            android:name=".Library"
+            android:exported="true"
+            />
         <activity
-            android:name=".Reader"
-            android:exported="true"></activity>
-        <activity
-            android:name=".BookLoader"
+            android:name=".SideBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,8 +31,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Display1"
             android:exported="true"></activity>
+        <activity
+            android:name=".Reader"
+            android:exported="true" />
+        <activity
+            android:name=".BookLoader"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

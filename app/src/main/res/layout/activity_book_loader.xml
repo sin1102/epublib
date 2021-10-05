@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".BookLoader">
+
     <Button
         android:id="@+id/browse_files"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BROWSE"/>
+        android:text="BROWSE" />
 </RelativeLayout>

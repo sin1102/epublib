@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">epub</string>
+    <string name="app_name"></string>
+
+    <string name="nav_My_Profile">My Profile</string>
+    <string name="nav_Home">Home</string>
+    <string name="nav_Log_Out">Log Out</string>
+    <string name="nav_Account">Account</string>
+    <string name="nav_Change_Password">Change Password</string>
+    <string name="navigation_Drawer_Open">Open navigation</string>
+    <string name="navigation_Drawer_Close">Close navigation</string>
+    <string name="navigation_Library">Library</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
