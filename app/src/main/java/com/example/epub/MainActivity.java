@@ -6,18 +6,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         String str = null;
         TextView textView = findViewById(R.id.txtContent);
         ImageView imageView = findViewById(R.id.imgTest);
-
         InputStream inputStream = null;
 
         try {
@@ -77,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
             // Log the book's coverimage property
             Bitmap coverImage = BitmapFactory.decodeStream(book.getCoverImage()
                     .getInputStream());
-
             Log.i("epublib", "Coverimage is " + coverImage.getWidth() + " by "
                     + coverImage.getHeight() + " pixels");
 
