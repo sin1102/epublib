@@ -28,17 +28,19 @@
             android:name=".Login"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".Library"
+            android:exported="true"
+            android:parentActivityName=".SideBar"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Library"
-            android:exported="true"
-            android:parentActivityName=".SideBar"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
         <activity
             android:name=".SideBar"
             android:exported="true" />
