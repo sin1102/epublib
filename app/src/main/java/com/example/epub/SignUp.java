@@ -128,6 +128,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.GONE);
+    }
 
 
     private void closeKeyboard() {
