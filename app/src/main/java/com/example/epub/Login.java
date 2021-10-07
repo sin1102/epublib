@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar progressBar;
     private FirebaseAuth fAuth;
 
+    //Tạo giao diện
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
