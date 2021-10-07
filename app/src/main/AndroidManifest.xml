@@ -16,8 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Epub">
         <activity
-            android:name=".test"
+
+            android:name=".Profile"
             android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".Library"
+            android:exported="true"
+            android:parentActivityName=".SideBar"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" >
+
 
 
 
@@ -27,6 +36,7 @@
             android:name=".ForgotPassword"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name=".SignUp"
             android:exported="true"
