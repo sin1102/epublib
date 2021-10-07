@@ -11,7 +11,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-125dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,7 +28,7 @@
                 android:text="New Books"
                 android:textAlignment="viewStart"
                 android:textColor="@color/txtcolor"
-                android:textSize="30sp"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,14 +87,14 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/txtPopular"
+                android:id="@+id/txtEnglishBooks"
                 android:layout_width="158dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="30dp"
-                android:text="Popular Books"
+                android:text="English Books"
                 android:textAlignment="viewStart"
                 android:textColor="@color/txtcolor"
-                android:textSize="30sp"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="@+id/txtNewBook"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
@@ -101,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtPopular">
+                app:layout_constraintTop_toBottomOf="@+id/txtEnglishBooks">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
@@ -127,6 +129,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/image3"
                         app:layout_constraintTop_toTopOf="@+id/image3"
+                        app:layout_constraintVertical_bias="1.0"
                         app:srcCompat="@drawable/img_5"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -144,15 +147,15 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/txtRecent"
-                android:layout_width="158dp"
+                android:id="@+id/txtVietnameseBooks"
+                android:layout_width="170dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="30dp"
-                android:text="Recent Books"
+                android:text="Vietnamese Books"
                 android:textAlignment="viewStart"
                 android:textColor="@color/txtcolor"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="@+id/txtPopular"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@+id/txtEnglishBooks"
                 app:layout_constraintTop_toBottomOf="@+id/h2" />
 
             <HorizontalScrollView
@@ -160,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtRecent">
+                app:layout_constraintTop_toBottomOf="@+id/txtVietnameseBooks">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"

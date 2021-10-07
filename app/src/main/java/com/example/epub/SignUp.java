@@ -1,0 +1,145 @@
+package com.example.epub;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
+public class SignUp extends AppCompatActivity implements View.OnClickListener{
+
+    private EditText txtFullname, txtPassword, txtPasswordAgain, txtEmail;
+    private Button btnSignUp;
+    private ProgressBar progressBar;
+    private FirebaseAuth fAuth;
+
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference root = db.getReference().child("Users");
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+
+        txtFullname = findViewById(R.id.txtFullname);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtPassword = findViewById(R.id.txtPassword);
+        txtPasswordAgain = findViewById(R.id.PasswordAgain);
+
+        btnSignUp = findViewById(R.id.btnSignUp);
+        btnSignUp.setOnClickListener(this);
+
+        progressBar = findViewById(R.id.progressBar);
+        fAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.btnSignUp:
+                registerUser();
+                break;
+        }
+    }
+
+    private void registerUser() {
+
+        String fullname = txtFullname.getText().toString().trim();
+        String password = txtPassword.getText().toString().trim();
+        String email = txtEmail.getText().toString().trim();
+        String passwordAgain = txtPasswordAgain.getText().toString().trim();
+
+        if(fullname.isEmpty()){
+            txtFullname.setError("Full name is required");
+            txtFullname.requestFocus();
+            return;
+        }
+
+        if(email.isEmpty()){
+            txtEmail.setError("Email is required");
+            txtEmail.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            txtEmail.setError("Email invalid");
+            txtEmail.requestFocus();
+            return;
+        }
+
+        if(password.isEmpty()){
+            txtPassword.setError("Password is required");
+            txtPassword.requestFocus();
+            return;
+        }
+
+        if(password.length() < 6){
+            txtPassword.setError("Password must be bigger than 6 characters");
+            txtPassword.requestFocus();
+            return;
+        }
+
+        if(!passwordAgain.equals(password)){
+            txtPasswordAgain.setError("Password not match");
+            txtPasswordAgain.requestFocus();
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+        closeKeyboard();
+
+        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful()){
+                    HashMap<String, String> userMap = new HashMap<>();
+
+                    userMap.put("name", fullname);
+                    userMap.put("email", email);
+
+                    root.push().setValue(userMap);
+                    Toast.makeText(SignUp.this, "Register Completed", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    startActivity(new Intent(SignUp.this, Login.class));
+                }
+                else{
+                    Toast.makeText(SignUp.this, "Register Failed", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.GONE);
+    }
+
+
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+}

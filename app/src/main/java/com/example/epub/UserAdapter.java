@@ -1,6 +1,7 @@
 package com.example.epub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -40,8 +42,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         if (user == null){
             return;
         }
-        holder.imgUser.setImageResource(user.getResouceImage());
+        holder.imgUser.setImageBitmap(user.getResouceImage());
         holder.tvName.setText(user.getName());
+        holder.bookCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickReadBook(user);
+            }
+        });
+    }
+    private void onClickReadBook(User user) {
+        Intent I = new Intent(mContext, Reader.class);
+        I.putExtra("epub_location", user.getBookDir());
+        mContext.startActivity(I);
     }
 
     @Override
@@ -56,6 +69,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         private ImageView imgUser;
         private TextView tvName;
+        private CardView bookCard;
 
 
         public UserViewHolder(@NonNull View itemView) {
@@ -63,6 +77,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
             imgUser = itemView.findViewById(R.id.img_user);
             tvName = itemView.findViewById(R.id.tv_name);
+            bookCard = itemView.findViewById(R.id.bookCard);
+
 
         }
     }

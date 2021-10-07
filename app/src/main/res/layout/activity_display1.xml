@@ -25,8 +25,8 @@
                 android:layout_marginTop="16dp"
                 android:text="New Books"
                 android:textAlignment="viewStart"
-                android:textColor="#FFFEFE"
-                android:textSize="30sp"
+                android:textColor="@color/txtcolor"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +65,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/image"
                         app:layout_constraintTop_toTopOf="@+id/image"
-                        app:layout_constraintVertical_bias="1.0"
+                        app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/img_1"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -89,10 +89,10 @@
                 android:layout_width="158dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="30dp"
-                android:text="Popular Books"
+                android:text="English Books"
                 android:textAlignment="viewStart"
-                android:textColor="#EAE2E1"
-                android:textSize="30sp"
+                android:textColor="@color/txtcolor"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="@+id/txtNewBook"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
@@ -127,6 +127,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/image3"
                         app:layout_constraintTop_toTopOf="@+id/image3"
+                        app:layout_constraintVertical_bias="1.0"
                         app:srcCompat="@drawable/img_5"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -145,13 +146,13 @@
 
             <TextView
                 android:id="@+id/txtRecent"
-                android:layout_width="158dp"
+                android:layout_width="170dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="30dp"
-                android:text="Recent Books"
+                android:text="Vietnamese Books"
                 android:textAlignment="viewStart"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"
+                android:textColor="@color/txtcolor"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="@+id/txtPopular"
                 app:layout_constraintTop_toBottomOf="@+id/h2" />
 
