@@ -43,9 +43,9 @@ public class Library extends AppCompatActivity {
 
 
         try {
-            List<User> bookList = new ArrayList<>();
-            bookList = getListUser();
-            mUserAdapter.setData(bookList);
+            List<User> fileList = new ArrayList<>();
+            fileList = getListUser();
+            mUserAdapter.setData(fileList);
         } catch (Exception e) {
              Log.v("Err", e.getMessage());
         }
@@ -54,7 +54,7 @@ public class Library extends AppCompatActivity {
 
     private List<User> getListUser() throws Exception {
         List<User> list = new ArrayList<>();
-        File dir = Environment.getExternalStorageDirectory();
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         Search_Dir(dir, list);
 
         return list;
@@ -66,16 +66,12 @@ public class Library extends AppCompatActivity {
         File fileList[] = dir.listFiles();
         if (fileList != null) {
             for(int i = 0; i < fileList.length; i++) {
-                //if (fileList[i].getName() == "Download") {
-                //    Search_Dir(fileList[i], list);
-                //} else {
-                    if (fileList[i].getName().endsWith(epubExt)) {
-                        inputStream = new BufferedInputStream(new FileInputStream(fileList[i].getPath()));
-                        Book mybook = new EpubReader().readEpub(inputStream);
-                        Bitmap cover = BitmapFactory.decodeStream(mybook.getCoverImage().getInputStream());
-                        list.add(new User(cover, mybook.getTitle(), fileList[i].getPath()));
-                    }
-                //}
+                if (fileList[i].getName().endsWith(epubExt)) {
+                    inputStream = new BufferedInputStream(new FileInputStream(fileList[i].getPath()));
+                    Book mybook = new EpubReader().readEpub(inputStream);
+                    Bitmap cover = BitmapFactory.decodeStream(mybook.getCoverImage().getInputStream());
+                    list.add(new User(cover, mybook.getTitle(), fileList[i].getPath()));
+                }
             }
         }
     }

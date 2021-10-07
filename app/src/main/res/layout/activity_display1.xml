@@ -11,7 +11,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-207dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -48,6 +50,7 @@
 
                     <ImageButton
                         android:id="@+id/image"
+                        android:onClick="image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -59,6 +62,7 @@
 
                     <ImageButton
                         android:id="@+id/image1"
+                        android:onClick="image1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -71,6 +75,7 @@
 
                     <ImageButton
                         android:id="@+id/image2"
+                        android:onClick="image2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -109,6 +114,7 @@
 
                     <ImageButton
                         android:id="@+id/image3"
+                        android:onClick="image3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -121,6 +127,7 @@
 
                     <ImageButton
                         android:id="@+id/image5"
+                        android:onClick="image5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -133,6 +140,7 @@
 
                     <ImageButton
                         android:id="@+id/image6"
+                        android:onClick="image6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -169,6 +177,7 @@
 
                     <ImageButton
                         android:id="@+id/image7"
+                        android:onClick="image7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -181,6 +190,7 @@
 
                     <ImageButton
                         android:id="@+id/image8"
+                        android:onClick="image8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
@@ -192,6 +202,7 @@
 
                     <ImageButton
                         android:id="@+id/image9"
+                        android:onClick="image9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitCenter"
