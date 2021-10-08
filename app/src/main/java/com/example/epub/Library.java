@@ -10,6 +10,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -50,6 +54,15 @@ public class Library extends AppCompatActivity {
              Log.v("Err", e.getMessage());
         }
         rcvUser.setAdapter(mUserAdapter);
+
+        FloatingActionButton fab = findViewById(R.id.fab_btn);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Library.this,"Day la nut add nhe", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private List<User> getListUser() throws Exception {
