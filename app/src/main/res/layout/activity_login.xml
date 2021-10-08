@@ -41,7 +41,7 @@
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:paddingStart="10dp"
-            android:textColor="	#000080"
+            android:textColor="@color/black"
             android:textSize="14dp" />
 
         <EditText
@@ -59,7 +59,7 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingStart="10dp"
-            android:textColor="	#000080"
+            android:textColor="@color/black"
             android:textSize="14dp" />
 
         <TextView

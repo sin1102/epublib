@@ -110,12 +110,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     }
                     else
                     {
-                        user.sendEmailVerification();
-                        Toast.makeText(Login.this, "Email has been sent. Please check your email to verify your account", Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(Login.this, "Your account hasn't been verify yet", Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Looks like you don't have account! Please sign up", Toast.LENGTH_SHORT).show();
                 }
             }
         });
