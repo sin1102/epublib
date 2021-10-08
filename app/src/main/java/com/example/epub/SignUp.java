@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -116,9 +117,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                     userMap.put("email", email);
 
                     root.push().setValue(userMap);
-                    Toast.makeText(SignUp.this, "Register Completed", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    startActivity(new Intent(SignUp.this, Login.class));
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.isEmailVerified()){
+                        Toast.makeText(SignUp.this, "Email has been registerd", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        user.sendEmailVerification();
+                        startActivity(new Intent(SignUp.this, Login.class));
+                        Toast.makeText(SignUp.this, "Email has been sent. Please check your email to verify your account", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(SignUp.this, "Register Failed", Toast.LENGTH_SHORT).show();
