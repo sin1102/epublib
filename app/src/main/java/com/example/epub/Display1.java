@@ -36,7 +36,6 @@ public class Display1 extends AppCompatActivity{
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.book_information);
-
         Window window = dialog.getWindow();
         if(window == null){
             return;
