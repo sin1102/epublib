@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import java.util.List;
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.epub.EpubReader;
 
-public class Library extends AppCompatActivity {
+public class Library extends SideBar {
 
 
     private RecyclerView rcvUser;
@@ -35,7 +36,9 @@ public class Library extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_library);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.activity_library, null, false);
+        mDrawerLayout.addView(v, 0);
 
         rcvUser = findViewById(R.id.rcv_user);
         mUserAdapter = new UserAdapter(this);

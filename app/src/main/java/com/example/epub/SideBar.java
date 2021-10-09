@@ -18,14 +18,14 @@ import com.google.android.material.navigation.NavigationView;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int FRAGMENT_HOME = 0;
-    private static final int FRAGMENT_LIBRARY = 1;
+//    private static final int FRAGMENT_HOME = 0;
+//    private static final int FRAGMENT_LIBRARY = 1;
+//
+//    private int mCurrentFragment = FRAGMENT_HOME;
 
-    private int mCurrentFragment = FRAGMENT_HOME;
 
-
-    private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
+    public DrawerLayout mDrawerLayout;
+    public NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,21 +42,19 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        replaceFragment(new HomeFrg());
+        //replaceFragment(new HomeFrg());
         navigationView.getMenu().findItem(R.id.nav_Home).setChecked(true);
-        //navigationView.setCheckedItem(R.id.nav_Home);
+        navigationView.setCheckedItem(R.id.nav_Home);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.nav_Home){
-            if (mCurrentFragment != FRAGMENT_HOME){
-                replaceFragment(new HomeFrg());
-                mCurrentFragment = FRAGMENT_HOME;
-            }
-
-        }else if (id == R.id.nav_Library){
+        if (id == R.id.nav_Home) {
+            Intent it = new Intent(this, Display1.class);
+            startActivity(it);
+        }
+        if (id == R.id.nav_Library){
             Intent it = new Intent(this, Library.class);
             startActivity(it);
 
@@ -68,22 +66,22 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    public void onBackPressed(){
-        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
-            super.onBackPressed();
-        }
-
-    }
-
-    private void replaceFragment(Fragment fragment){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, fragment);
-        transaction.commit();
-    }
+//
+//    @Override
+//    public void onBackPressed(){
+//        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+//            mDrawerLayout.closeDrawer(GravityCompat.START);
+//        }else{
+//            super.onBackPressed();
+//        }
+//
+//    }
+//
+//    private void replaceFragment(Fragment fragment){
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.content_frame, fragment);
+//        transaction.commit();
+//    }
 //
 //    @Override
 //    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
