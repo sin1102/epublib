@@ -51,15 +51,18 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_Home) {
-            Intent it = new Intent(this, Display1.class);
-            startActivity(it);
+            if(this.getClass().getSimpleName() == "Display1")
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            else {
+                Intent it = new Intent(this, Display1.class);
+                startActivity(it);
+            }
         }
         if (id == R.id.nav_Library){
             Intent it = new Intent(this, Library.class);
             startActivity(it);
 
         }else  if (id == R.id.nav_Log_Out){
-
 
         }
 
