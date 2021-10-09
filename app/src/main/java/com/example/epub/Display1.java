@@ -5,6 +5,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -21,14 +23,51 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Display1 extends AppCompatActivity{
+
+    //RecyclerView Minh
+    private RecyclerView rcvCategory;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display1);
+        setContentView(R.layout.activity_main);
 
+        rcvCategory = findViewById(R.id.rcv_category);
+        categoryAdapter = new CategoryAdapter(Display1.this);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        rcvCategory.setLayoutManager(linearLayoutManager);
+
+        categoryAdapter.setData(getListCategory());
+        rcvCategory.setAdapter(categoryAdapter);
+    }
+
+    private List<Category> getListCategory(){
+        List<Category> listCategory = new ArrayList<>();
+
+        List<Book> listBook = new ArrayList<>();
+        listBook.add(new Book(R.drawable.img));
+        listBook.add(new Book(R.drawable.img_1));
+        listBook.add(new Book(R.drawable.img_2));
+        listBook.add(new Book(R.drawable.img_3));
+        listBook.add(new Book(R.drawable.img_4));
+        listBook.add(new Book(R.drawable.img_5));
+        listBook.add(new Book(R.drawable.img_6));
+        listBook.add(new Book(R.drawable.img_7));
+        listBook.add(new Book(R.drawable.img_8));
+        listBook.add(new Book(R.drawable.img_9));
+
+        listCategory.add(new Category("New Books", listBook));
+        listCategory.add(new Category("English Books", listBook));
+        listCategory.add(new Category("Vietnamese Books", listBook));
+
+        return listCategory;
     }
 
     //Hàm mở dialog
