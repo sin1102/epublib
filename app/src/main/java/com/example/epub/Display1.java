@@ -22,6 +22,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class Display1 extends SideBar{
 
     @Override
@@ -32,6 +34,15 @@ public class Display1 extends SideBar{
         LayoutInflater inflater = LayoutInflater.from(this);
         View v = inflater.inflate(R.layout.activity_display1, null, false);
         mDrawerLayout.addView(v, 0);
+        FloatingActionButton fab = findViewById(R.id.fab_btn);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chooseFile = new Intent();
+                chooseFile.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(chooseFile, 2);
+            }
+        });
     }
 
     //Hàm mở dialog

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -58,13 +59,7 @@ public class Library extends SideBar {
         }
         rcvUser.setAdapter(mUserAdapter);
 
-        FloatingActionButton fab = findViewById(R.id.fab_btn);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Library.this,"Day la nut add nhe", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
     }
 
