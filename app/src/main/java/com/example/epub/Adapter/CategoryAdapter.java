@@ -1,4 +1,4 @@
-package com.example.epub;
+package com.example.epub.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.core.Context;
+import com.example.epub.Model.Category;
+import com.example.epub.View.Display1;
+import com.example.epub.R;
 
 import java.util.List;
 

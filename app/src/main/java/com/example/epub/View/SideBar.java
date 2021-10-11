@@ -1,4 +1,4 @@
-package com.example.epub;
+package com.example.epub.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -6,14 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.epub.Fragment.HomeFrg;
+import com.example.epub.R;
+import com.example.epub.View.Display1;
+import com.example.epub.View.Library;
 import com.google.android.material.navigation.NavigationView;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,21 +51,22 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_Home) {
-            if(this.getClass().getSimpleName() == "Display1")
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-            else {
                 Intent it = new Intent(this, Display1.class);
                 startActivity(it);
-            }
         }
-        if (id == R.id.nav_Library){
+        else if (id == R.id.nav_Library){
             Intent it = new Intent(this, Library.class);
             startActivity(it);
 
         }else  if (id == R.id.nav_Log_Out){
 
         }
+        else if (id == R.id.nav_My_Profile) {
+            Intent it = new Intent(this, Profile.class);
+        }
+        else if (id == R.id.nav_Change_Password) {
 
+        }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

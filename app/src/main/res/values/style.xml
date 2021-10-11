@@ -30,4 +30,8 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
+    <style name="AppTheme.UpLoadBook">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.epub;
+package com.example.epub.View;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
@@ -24,6 +23,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.epub.R;
 
 import org.json.JSONObject;
 
@@ -567,7 +568,7 @@ public class EpubReaderView extends WebView {
             final String[] items = ChapterListString.toArray(new String[ChapterListString.size()]);
             AlertDialog.Builder alertbuilder;
             if(theme==this.THEME_DARK)
-                alertbuilder = new AlertDialog.Builder(context,R.style.DarkDialog);
+                alertbuilder = new AlertDialog.Builder(context, R.style.DarkDialog);
             else
                 alertbuilder = new AlertDialog.Builder(context,R.style.LightDialog);
             alertbuilder.setTitle("Select the Chapter");

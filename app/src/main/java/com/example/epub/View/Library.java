@@ -1,26 +1,23 @@
-package com.example.epub;
+package com.example.epub.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.epub.Adapter.UserAdapter;
+import com.example.epub.R;
+import com.example.epub.Model.User;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +43,8 @@ public class Library extends SideBar {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         rcvUser.setLayoutManager(gridLayoutManager);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.LayoutHeader)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.LayoutHeader)));
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         try {

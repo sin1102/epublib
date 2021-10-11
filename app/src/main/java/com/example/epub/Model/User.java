@@ -1,4 +1,4 @@
-package com.example.epub;
+package com.example.epub.Model;
 
 import android.graphics.Bitmap;
 
@@ -12,6 +12,11 @@ public class User {
         this.resouceImage = resouceImage;
         this.name = name;
         this.bookDir = bookDir;
+    }
+
+    public User(Bitmap resouceImage, String name) {
+        this.resouceImage = resouceImage;
+        this.name = name;
     }
 
     public String getBookDir() {

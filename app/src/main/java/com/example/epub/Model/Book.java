@@ -1,4 +1,4 @@
-package com.example.epub;
+package com.example.epub.Model;
 
 import android.view.View;
 import android.widget.ImageView;

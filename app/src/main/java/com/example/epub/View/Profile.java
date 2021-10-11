@@ -1,8 +1,10 @@
-package com.example.epub;
+package com.example.epub.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.epub.R;
 
 public class Profile extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.epub;
+package com.example.epub.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +8,15 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.epub.Model.Book;
+import com.example.epub.R;
+
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     private List<Book> mBook;
+
 
     public  void  setData(List<Book> list){
         this.mBook = list;

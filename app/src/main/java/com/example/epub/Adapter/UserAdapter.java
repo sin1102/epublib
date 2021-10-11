@@ -1,4 +1,4 @@
-package com.example.epub;
+package com.example.epub.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.epub.R;
+import com.example.epub.Control.Reader;
+import com.example.epub.Model.User;
+
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
@@ -21,6 +25,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public UserAdapter(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public UserAdapter() {
     }
 
     public  void setData(List<User> list){

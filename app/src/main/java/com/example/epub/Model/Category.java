@@ -1,6 +1,6 @@
-package com.example.epub;
+package com.example.epub.Model;
 
-import com.example.epub.Book;
+import com.example.epub.Model.Book;
 
 import java.util.List;
 
