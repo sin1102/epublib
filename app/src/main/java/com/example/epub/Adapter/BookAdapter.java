@@ -9,16 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epub.Model.Book;
+import com.example.epub.Model.BookModel;
 import com.example.epub.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
-    private List<Book> mBook;
+    private List<BookModel> mBook;
 
 
-    public  void  setData(List<Book> list){
+    public  void  setData(List<BookModel> list){
         this.mBook = list;
         notifyDataSetChanged();
     }
@@ -32,11 +34,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        Book book = mBook.get(position);
+        BookModel book = mBook.get(position);
         if(book == null){
             return;
         }
-        holder.imgBook.setImageResource(book.getResourceId());
+        Picasso.get().load(book.getBookCover()).fit().centerCrop().into(holder.imgBook);
     }
 
     @Override

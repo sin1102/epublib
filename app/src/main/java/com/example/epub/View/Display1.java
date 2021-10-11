@@ -59,6 +59,7 @@ import nl.siegmann.epublib.epub.EpubReader;
 public class Display1 extends SideBar {
     private RecyclerView rcvCategory;
     private CategoryAdapter categoryAdapter;
+    private List<BookModel> bookList;
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
@@ -91,7 +92,7 @@ public class Display1 extends SideBar {
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
-
+        //RetriveFile();
         FloatingActionButton fab = findViewById(R.id.fab_btn);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,21 +117,10 @@ public class Display1 extends SideBar {
     }
     private List<Category> getListCategory(){
         List<Category> listCategory = new ArrayList<>();
-        List<Book> listBook = new ArrayList<>();
-        listBook.add(new Book(R.drawable.img));
-        listBook.add(new Book(R.drawable.img_1));
-        listBook.add(new Book(R.drawable.img_2));
-        listBook.add(new Book(R.drawable.img_3));
-        listBook.add(new Book(R.drawable.img_4));
-        listBook.add(new Book(R.drawable.img_5));
-        listBook.add(new Book(R.drawable.img_6));
-        listBook.add(new Book(R.drawable.img_7));
-        listBook.add(new Book(R.drawable.img_8));
-        listBook.add(new Book(R.drawable.img_9));
-
-        listCategory.add(new Category("New Books", listBook));
-        listCategory.add(new Category("English Books", listBook));
-        listCategory.add(new Category("Vietnamese Books", listBook));
+        List<Book> bookList = new ArrayList<>();
+        listCategory.add(new Category("New Books", Display1.this.bookList));
+        listCategory.add(new Category("English Books", Display1.this.bookList));
+        listCategory.add(new Category("Vietnamese Books", Display1.this.bookList));
 
         return listCategory;
     }
@@ -193,7 +183,7 @@ public class Display1 extends SideBar {
         bookTitle = dialog.findViewById(R.id.txtTitleUp);
         bookAuthor = dialog.findViewById(R.id.edtAuthorUp);
         bookGenre = dialog.findViewById(R.id.txtGenreUp);
-        bookLanguage = dialog.findViewById(R.id.txtLanguage);
+        bookLanguage = dialog.findViewById(R.id.txtLanguageUp);
 
         InputStream bookStream = new BufferedInputStream(new FileInputStream(bookDir));
         nl.siegmann.epublib.domain.Book epub = new EpubReader().readEpub(bookStream);
@@ -220,6 +210,7 @@ public class Display1 extends SideBar {
 
     private void uploadToFirebase(Uri uri) throws Exception {
         BookModel book = new BookModel();
+        //pgBar = findViewById(R.id.pgBar);
         String[] bookDir = uri.getPath().split("/");
         StorageReference imgRef = storageReference.child(bookDir[bookDir.length - 1] + ".jpg");
         InputStream inputStream = new BufferedInputStream(new FileInputStream(uri.getPath()));
@@ -242,7 +233,7 @@ public class Display1 extends SideBar {
             }
         });
 
-        StorageReference fileRef = storageReference.child(bookDir[bookDir.length - 1] + ".epub");
+        StorageReference fileRef = storageReference.child(bookDir[bookDir.length - 1]);
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -252,19 +243,22 @@ public class Display1 extends SideBar {
                         book.setBookAuthor(bookAuthor.getText().toString());
                         book.setBookTitle(bookTitle.getText().toString());
                         book.setBookGenre(bookGenre.getText().toString());
+                        book.setBookLanguage(bookLanguage.getText().toString());
                         book.setBookURL(uri.toString());
                         String bookID = databaseReference.push().getKey();
                         databaseReference.child(bookID).setValue(book);
-                        //pgBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(Display1.this, "Upload Successfully!", Toast.LENGTH_SHORT).show();
                         Log.w("success", "upload success!");
+                        //pgBar.setProgress(0);
+
                     }
                 });
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                //pgBar.setVisibility(View.VISIBLE);
+//                double progress  = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+//                pgBar.setProgress((int)progress);
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -274,7 +268,26 @@ public class Display1 extends SideBar {
                 Log.w("fail", "upload failed!");
             }
         });
+    }
 
+    //Load book from firebase
+    public void RetriveFile() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                BookModel book = new BookModel();
+                for (DataSnapshot temp : snapshot.getChildren()) {
+                    book = temp.getValue(BookModel.class);
+                    bookList.add(book);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
