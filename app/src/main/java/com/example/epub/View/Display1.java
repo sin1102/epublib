@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +35,7 @@ import com.example.epub.Model.BookModel;
 import com.example.epub.Model.Category;
 import com.example.epub.Model.Book;
 import com.example.epub.R;
+import com.example.epub.Testt.TesrProcessbar;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,10 +65,12 @@ public class Display1 extends SideBar {
     private CategoryAdapter categoryAdapter;
     private List<BookModel> bookList;
 
+
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     private StorageTask uploadTask;
 
+    ProgressDialog progressDialog;
     EditText bookAuthor;
     EditText bookGenre;
     EditText bookLanguage;
@@ -116,21 +120,16 @@ public class Display1 extends SideBar {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent chooseFile = new Intent();
-                chooseFile.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(chooseFile, 2);
+//                Intent chooseFile = new Intent();
+//                chooseFile.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(chooseFile, 2);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent = Intent.createChooser(intent, "Choose Books");
+                startActivityForResult(intent, 2);
 
-                if (Build.VERSION.SDK_INT <= 19) {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(intent, 2);
-                } else if (Build.VERSION.SDK_INT > 19) {
-                    String path = Environment.getExternalStorageDirectory().getPath();
-                    Uri uri = Uri.parse(path);
-                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                    //intent.setDataAndType(uri, "*/*");
-                    startActivityForResult(intent, 2);
-                }
             }
         });
     }
@@ -239,6 +238,7 @@ public class Display1 extends SideBar {
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 try {
                     uploadToFirebase(uri);
                 } catch (Exception e) {
@@ -300,9 +300,21 @@ public class Display1 extends SideBar {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-//                double progress  = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-//                pgBar.setProgress((int)progress);
-
+                double progress  = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                pgBar.setProgress((int)progress);
+                progressDialog= new ProgressDialog(Display1.this);
+                progressDialog.setTitle("Title");
+                progressDialog.setMax(100);
+                progressDialog.setMessage("Progress Bar");
+                progressDialog.setProgressStyle(progressDialog.STYLE_HORIZONTAL);
+                progressDialog.show();
+                progressDialog.setCancelable(false);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                       progressDialog.setProgress((int)progress);
+                    }
+                }).start();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
