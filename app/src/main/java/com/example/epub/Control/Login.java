@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epub.R;
+import com.example.epub.View.Display1;
 import com.example.epub.View.SideBar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -108,7 +109,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.isEmailVerified()){
-                        startActivity(new Intent(Login.this, SideBar.class));
+                        startActivity(new Intent(Login.this, Display1.class));
                     }
                     else
                     {
