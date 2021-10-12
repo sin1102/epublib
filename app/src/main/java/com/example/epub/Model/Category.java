@@ -7,9 +7,9 @@ import java.util.List;
 public class Category {
 
     private String nameCategory;
-    private List<BookModel> books;
+    private List<Book> books;
 
-    public Category(String nameCategory, List<BookModel> books){
+    public Category(String nameCategory, List<Book> books){
         this.nameCategory = nameCategory;
         this.books = books;
     }
@@ -22,11 +22,11 @@ public class Category {
         this.nameCategory = nameCategory;
     }
 
-    public List<BookModel> getBooks(){
+    public List<Book> getBooks(){
         return books;
     }
 
-    public void setBooks(List<BookModel> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 }

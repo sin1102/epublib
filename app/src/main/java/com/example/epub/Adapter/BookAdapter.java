@@ -17,10 +17,10 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
-    private List<BookModel> mBook;
+    private List<Book> mBook;
 
 
-    public  void  setData(List<BookModel> list){
+    public  void  setData(List<Book> list){
         this.mBook = list;
         notifyDataSetChanged();
     }
@@ -34,11 +34,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        BookModel book = mBook.get(position);
+        Book book = mBook.get(position);
         if(book == null){
             return;
         }
-        Picasso.get().load(book.getBookCover()).fit().centerCrop().into(holder.imgBook);
+        holder.imgBook.setImageResource(book.getResourceId());
     }
 
     @Override
