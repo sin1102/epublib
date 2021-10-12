@@ -125,9 +125,9 @@ public class Display1 extends SideBar {
 //                startActivityForResult(chooseFile, 2);
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent = Intent.createChooser(intent, "Choose Books");
+                //intent.setType("*/*");
+                //intent.addCategory(Intent.CATEGORY_OPENABLE);
+                //intent = Intent.createChooser(intent, "Choose Books");
                 startActivityForResult(intent, 2);
 
             }
@@ -241,6 +241,7 @@ public class Display1 extends SideBar {
 
                 try {
                     uploadToFirebase(uri);
+                    dialog.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -252,8 +253,13 @@ public class Display1 extends SideBar {
     //Upload to FireBase
 
     private void uploadToFirebase(Uri uri) throws Exception {
+        progressDialog= new ProgressDialog(Display1.this);
+        progressDialog.setTitle("Upload book");
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Uploading");
+        progressDialog.setProgressStyle(progressDialog.STYLE_HORIZONTAL);
+
         BookModel book = new BookModel();
-        //pgBar = findViewById(R.id.pgBar);
         String[] bookDir = uri.getPath().split("/");
         StorageReference imgRef = storageReference.child(bookDir[bookDir.length - 1] + ".jpg");
         InputStream inputStream = new BufferedInputStream(new FileInputStream(uri.getPath()));
@@ -292,8 +298,7 @@ public class Display1 extends SideBar {
                         databaseReference.child(bookID).setValue(book);
                         Toast.makeText(Display1.this, "Upload Successfully!", Toast.LENGTH_SHORT).show();
                         Log.w("success", "upload success!");
-                        //pgBar.setProgress(0);
-
+                        progressDialog.dismiss();
                     }
                 });
             }
@@ -301,12 +306,6 @@ public class Display1 extends SideBar {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                 double progress  = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                pgBar.setProgress((int)progress);
-                progressDialog= new ProgressDialog(Display1.this);
-                progressDialog.setTitle("Title");
-                progressDialog.setMax(100);
-                progressDialog.setMessage("Progress Bar");
-                progressDialog.setProgressStyle(progressDialog.STYLE_HORIZONTAL);
                 progressDialog.show();
                 progressDialog.setCancelable(false);
                 new Thread(new Runnable() {
