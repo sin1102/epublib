@@ -5,28 +5,45 @@ import com.example.epub.Model.Book;
 import java.util.List;
 
 public class Category {
+    int image;
+    String title;
+    String genre;
 
-    private String nameCategory;
-    private List<Book> books;
-
-    public Category(String nameCategory, List<Book> books){
-        this.nameCategory = nameCategory;
-        this.books = books;
+    public Category(int image, String title, String genre) {
+        this.title = title;
+        this.image = image;
+        this.genre = genre;
     }
 
-    public String getNameCategory(){
-        return nameCategory;
+    public Category(String genre) {
+        this.genre = genre;
     }
 
-    public void setNameCategory(String nameCategory){
-        this.nameCategory = nameCategory;
+    public String getGenre() {
+        return genre;
     }
 
-    public List<Book> getBooks(){
-        return books;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Category(int image) {
+        this.image = image;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }

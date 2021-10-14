@@ -61,8 +61,7 @@ import java.util.List;
 import nl.siegmann.epublib.epub.EpubReader;
 
 public class Display1 extends SideBar {
-    private RecyclerView rcvCategory;
-    private CategoryAdapter categoryAdapter;
+
     private List<BookModel> bookList;
 
 
@@ -89,14 +88,7 @@ public class Display1 extends SideBar {
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
-        rcvCategory = findViewById(R.id.rcv_category);
-        categoryAdapter = new CategoryAdapter(this);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        rcvCategory.setLayoutManager(linearLayoutManager);
-        categoryAdapter.setData(getListCategory());
-        rcvCategory.setAdapter(categoryAdapter);
-        categoryAdapter.notifyDataSetChanged();
 //        databaseReference.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -146,25 +138,7 @@ public class Display1 extends SideBar {
         }
     }
 
-    private List<Category> getListCategory() {
-        List<Category> listCategory = new ArrayList<>();
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(R.id.image));
-        bookList.add(new Book(R.id.image1));
-        bookList.add(new Book(R.id.image2));
-        bookList.add(new Book(R.id.image3));
-        bookList.add(new Book(R.id.image6));
-        bookList.add(new Book(R.id.image5));
-        bookList.add(new Book(R.id.image7));
-        bookList.add(new Book(R.id.image8));
-        bookList.add(new Book(R.id.image9));
 
-        listCategory.add(new Category("New Books", bookList));
-        listCategory.add(new Category("English Books", bookList));
-        listCategory.add(new Category("Vietnamese Books", bookList));
-
-        return listCategory;
-    }
 
     //Hàm mở dialog
     private void openFeedbackDialog(int gravity) {

@@ -7,21 +7,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class Book {
-    private  int resourceId;
+    int image;
+    String title;
 
-
-    public Book (int resourceID){
-        this.resourceId = resourceId;
-
+    public Book(int image, String title) {
+        this.title = title;
+        this.image = image;
     }
 
-    public int getResourceId(){
-        return resourceId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setResourceId(int resourceId)   {
-        this.resourceId = resourceId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
+    public Book(int image) {
+        this.image = image;
+    }
 
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
 }

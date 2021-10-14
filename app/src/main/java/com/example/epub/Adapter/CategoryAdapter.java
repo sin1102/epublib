@@ -15,61 +15,64 @@ import com.example.epub.R;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-    private Display1 mConText;
-    private List<Category> mListCategory;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-    public CategoryAdapter(Display1 mConText){
-        this.mConText = mConText;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+
+    private List<Category> categories;
+    private Context context;
+
+    public CategoryAdapter(List<Category> categories, Context context) {
+        this.categories = categories;
+        this.context = context;
     }
 
-    public void setData(List<Category> list){
-        this.mListCategory = list;
-        notifyDataSetChanged();
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        TextView nTitle;
+        ImageView nImage;
+        TextView nGenre;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            nTitle = itemView.findViewById(R.id.title_book_2);
+            nImage = itemView.findViewById(R.id.img_category);
+            nGenre = itemView.findViewById(R.id.genre);
+        }
     }
 
     @NonNull
     @Override
-    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
-        return new CategoryViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        Category category = mListCategory.get(position);
-        if (category == null){
-            return;
-        }
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Category category = categories.get(position);
 
-        holder.tvNameCategory.setText(category.getNameCategory());
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mConText, RecyclerView.HORIZONTAL, false);
-        holder.rcvBook.setLayoutManager(linearLayoutManager);
-
-        BookAdapter bookAdapter = new BookAdapter();
-        bookAdapter.setData(category.getBooks());
-        holder.rcvBook.setAdapter(bookAdapter);
+        holder.nTitle.setText(category.getTitle());
+        holder.nImage.setImageResource(category.getImage());
+        holder.nGenre.setText(category.getGenre());
     }
 
     @Override
     public int getItemCount() {
-        if(mListCategory != null){
-            return mListCategory.size();
-        }
-        return 0;
-    }
-
-    public class CategoryViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvNameCategory;
-        private RecyclerView rcvBook;
-
-        public  CategoryViewHolder(@NonNull View itemView){
-            super(itemView);
-
-            tvNameCategory = itemView.findViewById(R.id.tv_name_category);
-            rcvBook = itemView.findViewById(R.id.rcv_book);
-        }
+        return categories.size();
     }
 }
