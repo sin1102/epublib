@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epub.Adapter.CategoryAdapter;
+import com.example.epub.Adapter.MainAdapter;
 import com.example.epub.Model.BookModel;
 import com.example.epub.Model.Category;
 import com.example.epub.Model.Book;
@@ -67,7 +68,6 @@ public class Display1 extends SideBar {
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
-    private StorageTask uploadTask;
 
     ProgressDialog progressDialog;
     EditText bookAuthor;
@@ -75,7 +75,7 @@ public class Display1 extends SideBar {
     EditText bookLanguage;
     ImageView bookCover;
     TextView bookTitle;
-    ProgressBar pgBar;
+    RecyclerView recyclerView1, recyclerView2,  recyclerView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,27 +85,51 @@ public class Display1 extends SideBar {
         View v = inflater.inflate(R.layout.activity_display1, null, false);
         mDrawerLayout.addView(v, 0);
 
+        bookList = new ArrayList<>();
+
+        recyclerView1 = findViewById(R.id.recycler_view1);
+        recyclerView2 = findViewById(R.id.recycler_view2);
+        recyclerView3 = findViewById(R.id.recycler_view3);
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView1.setLayoutManager(layoutManager1);
 
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                BookModel book = new BookModel();
-//                bookList = new ArrayList<>();
-//                for (DataSnapshot temp : snapshot.getChildren()) {
-//                    book = temp.getValue(BookModel.class);
-//                    bookList.add(book);
-//                }
-//                categoryAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView2.setLayoutManager(layoutManager2);
+
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView3.setLayoutManager(layoutManager3);
+
+        MainAdapter mainAdapter1 = new MainAdapter(bookList, this);
+        recyclerView1.setAdapter(mainAdapter1);
+
+        MainAdapter mainAdapter2 = new MainAdapter(bookList, this);
+        recyclerView2.setAdapter(mainAdapter2);
+
+        CategoryAdapter categoryAdapter = new CategoryAdapter(bookList, this);
+        recyclerView3.setAdapter(categoryAdapter);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                BookModel book = new BookModel();
+
+                for (DataSnapshot temp : snapshot.getChildren()) {
+                    book = temp.getValue(BookModel.class);
+                    bookList.add(book);
+                }
+                mainAdapter1.notifyDataSetChanged();
+                mainAdapter2.notifyDataSetChanged();
+                categoryAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         FloatingActionButton fab = findViewById(R.id.fab_btn);

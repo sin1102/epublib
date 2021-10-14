@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.epub.Model.BookModel;
 import com.example.epub.Model.Category;
 import com.example.epub.View.Display1;
 import com.example.epub.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,10 +35,10 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private List<Category> categories;
+    private List<BookModel> categories;
     private Context context;
 
-    public CategoryAdapter(List<Category> categories, Context context) {
+    public CategoryAdapter(List<BookModel> categories, Context context) {
         this.categories = categories;
         this.context = context;
     }
@@ -64,15 +66,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Category category = categories.get(position);
+        BookModel category = categories.get(position);
 
-        holder.nTitle.setText(category.getTitle());
-        holder.nImage.setImageResource(category.getImage());
-        holder.nGenre.setText(category.getGenre());
+        holder.nTitle.setText(category.getBookTitle());
+        Picasso.get().load(category.getBookCover()).into(holder.nImage);
+        holder.nGenre.setText(category.getBookGenre());
     }
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        if (categories != null)
+            return categories.size();
+        return 0;
     }
 }

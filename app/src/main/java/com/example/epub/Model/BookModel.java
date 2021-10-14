@@ -60,14 +60,4 @@ public class BookModel {
         this.bookGenre = bookGenre;
     }
 
-    public BookModel(String bookCover, String bookTitle) {
-        this.bookCover = bookCover;
-        this.bookTitle = bookTitle;
-    }
-
-    public BookModel(String bookCover, String bookTitle, String bookGenre) {
-        this.bookCover = bookCover;
-        this.bookTitle = bookTitle;
-        this.bookGenre = bookGenre;
-    }
 }

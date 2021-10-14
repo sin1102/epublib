@@ -63,13 +63,13 @@ public class Home extends AppCompatActivity {
         recyclerView3.setLayoutManager(layoutManager3);
 
 
-        MainAdapter mainAdapter1 = new MainAdapter(bookList, this);
-        recyclerView1.setAdapter(mainAdapter1);
-
-        MainAdapter mainAdapter2 = new MainAdapter(bookList, this);
-        recyclerView2.setAdapter(mainAdapter2);
-
-        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList, this);
-        recyclerView3.setAdapter(categoryAdapter);
+//        MainAdapter mainAdapter1 = new MainAdapter(bookList, this);
+//        recyclerView1.setAdapter(mainAdapter1);
+//
+//        MainAdapter mainAdapter2 = new MainAdapter(bookList, this);
+//        recyclerView2.setAdapter(mainAdapter2);
+//
+//        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList, this);
+//        recyclerView3.setAdapter(categoryAdapter);
     }
 }

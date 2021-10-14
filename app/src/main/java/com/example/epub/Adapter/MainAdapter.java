@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epub.Model.Book;
+import com.example.epub.Model.BookModel;
 import com.example.epub.R;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -21,10 +23,10 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    private List<Book> books;
+    private List<BookModel> books;
     private Context context;
 
-    public MainAdapter(List<Book> books, Context context) {
+    public MainAdapter(List<BookModel> books, Context context) {
         this.books = books;
         this.context = context;
     }
@@ -50,14 +52,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Book book = books.get(position);
+        BookModel book = books.get(position);
 
-        holder.mTitle.setText(book.getTitle());
-        holder.mImage.setImageResource(book.getImage());
+        holder.mTitle.setText(book.getBookTitle());
+        Picasso.get().load(book.getBookCover()).into(holder.mImage);
     }
 
     @Override
     public int getItemCount() {
-        return books.size();
+        if (books != null)
+            return books.size();
+        return 0;
     }
 }
