@@ -2,9 +2,10 @@ package com.example.epub.Model;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.net.URL;
 
-public class BookModel {
+public class BookModel implements Serializable {
     private String bookCover;
     private String bookTitle;
     private String bookAuthor;

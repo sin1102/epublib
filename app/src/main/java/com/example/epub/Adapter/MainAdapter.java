@@ -2,6 +2,7 @@ package com.example.epub.Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -17,16 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epub.Model.Book;
 import com.example.epub.Model.BookModel;
 import com.example.epub.R;
 import com.example.epub.View.Display1;
+import com.example.epub.View.Download;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,12 +48,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         TextView mTitle;
         ImageView mImage;
+        CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             mTitle = itemView.findViewById(R.id.title_book);
             mImage = itemView.findViewById(R.id.image_view);
+            cardView = itemView.findViewById(R.id.horizontalList);
         }
+
     }
 
     @NonNull
@@ -65,6 +71,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         holder.mTitle.setText(book.getBookTitle());
         Picasso.get().load(book.getBookCover()).into(holder.mImage);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(context, Download.class);
+                it.putExtra("BOOK", book);
+                context.startActivity(it);
+            }
+        });
     }
 
     @Override
@@ -79,7 +93,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.book_information);
         Window window = dialog.getWindow();
-
         if (window == null) {
             return;
         }

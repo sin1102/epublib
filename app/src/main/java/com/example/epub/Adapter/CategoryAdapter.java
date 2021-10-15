@@ -1,11 +1,13 @@
 package com.example.epub.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import com.example.epub.Model.BookModel;
 import com.example.epub.Model.Category;
 import com.example.epub.View.Display1;
 import com.example.epub.R;
+import com.example.epub.View.Download;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -48,12 +51,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         TextView nTitle;
         ImageView nImage;
         TextView nGenre;
+        CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nTitle = itemView.findViewById(R.id.title_book_2);
             nImage = itemView.findViewById(R.id.img_category);
             nGenre = itemView.findViewById(R.id.genre);
+            cardView = itemView.findViewById(R.id.verticalList);
         }
     }
 
@@ -71,6 +76,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         holder.nTitle.setText(category.getBookTitle());
         Picasso.get().load(category.getBookCover()).into(holder.nImage);
         holder.nGenre.setText(category.getBookGenre());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(context, Download.class);
+                it.putExtra("BOOK", category);
+                context.startActivity(it);
+            }
+        });
     }
 
     @Override

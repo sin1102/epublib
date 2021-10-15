@@ -50,8 +50,9 @@
             android:name=".Control.Reader"
             android:exported="true" />
         <activity
-            android:name=".BookLoader"
-            android:exported="true" />
+            android:name=".View.Download"
+            android:exported="true"
+            android:theme="@style/AppTheme.DownloadLoadBook"/>
     </application>
 
 </manifest>
