@@ -25,9 +25,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,8 +68,9 @@ public class Display1 extends SideBar {
 
     ProgressDialog progressDialog;
     EditText bookAuthor;
-    EditText bookGenre;
-    EditText bookLanguage;
+//    EditText bookGenre;
+//    EditText bookLanguage;
+    Spinner bookLanguage, bookGenre;
     ImageView bookCover;
     TextView bookTitle;
     RecyclerView recyclerView1, recyclerView2,  recyclerView3;
@@ -171,7 +174,7 @@ public class Display1 extends SideBar {
     private void openUpLoad(int gravity, String bookDir, Uri uri) throws Exception {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_up_load_book);
+        dialog.setContentView(R.layout.activity_tesstaddd);
         Window window = dialog.getWindow();
         if (window == null) {
             return;
@@ -192,8 +195,15 @@ public class Display1 extends SideBar {
         bookCover = dialog.findViewById(R.id.imgCover);
         bookTitle = dialog.findViewById(R.id.txtTitleUp);
         bookAuthor = dialog.findViewById(R.id.edtAuthorUp);
-        bookGenre = dialog.findViewById(R.id.txtGenreUp);
-        bookLanguage = dialog.findViewById(R.id.txtLanguageUp);
+        bookGenre = dialog.findViewById(R.id.spinner2);
+        bookLanguage = dialog.findViewById(R.id.spinner1);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.language, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bookLanguage.setAdapter(adapter1);
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.genre, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bookGenre.setAdapter(adapter2);
 
         InputStream bookStream = new BufferedInputStream(new FileInputStream(bookDir));
         nl.siegmann.epublib.domain.Book epub = new EpubReader().readEpub(bookStream);
@@ -259,8 +269,8 @@ public class Display1 extends SideBar {
                     public void onSuccess(Uri uri) {
                         book.setBookAuthor(bookAuthor.getText().toString());
                         book.setBookTitle(bookTitle.getText().toString());
-                        book.setBookGenre(bookGenre.getText().toString());
-                        book.setBookLanguage(bookLanguage.getText().toString());
+                        book.setBookGenre(bookGenre.getSelectedItem().toString());
+                        book.setBookLanguage(bookLanguage.getSelectedItem().toString());
                         book.setBookURL(uri.toString());
                         String bookID = databaseReference.push().getKey();
                         databaseReference.child(bookID).setValue(book);
