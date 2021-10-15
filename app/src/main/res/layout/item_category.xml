@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/img_category"
@@ -29,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:background="@color/white"
                 android:text="Book 1"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:background="@color/white"
+                android:textColor="@color/txtcolor"
                 android:text="Its genre"
                 android:textSize="20sp"
                 android:maxLines="1"
