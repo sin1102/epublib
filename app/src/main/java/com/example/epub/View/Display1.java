@@ -170,37 +170,7 @@ public class Display1 extends SideBar {
 
 
     //Hàm mở dialog
-    private void openFeedbackDialog(int gravity) {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.book_information);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
 
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        WindowManager.LayoutParams windowAttribute = window.getAttributes();
-        windowAttribute.gravity = gravity;
-        window.setAttributes(windowAttribute);
-
-        if (Gravity.CENTER == gravity) {
-            dialog.setCancelable(true);
-        } else {
-            dialog.setCancelable(false);
-        }
-
-        Button btnDownload = dialog.findViewById(R.id.btnDownload);
-        btnDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Display1.this, "Đây là nút download", Toast.LENGTH_SHORT).show();
-            }
-        });
-        dialog.show();
-    }
 
     //Show popup UpLoad
     private void openUpLoad(int gravity, String bookDir, Uri uri) throws Exception {
@@ -327,41 +297,4 @@ public class Display1 extends SideBar {
         });
     }
 
-
-    //Các hàm bắt sụ kiện image button
-    public void image(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image1(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image2(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image3(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image5(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image6(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image7(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image8(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
-
-    public void image9(View view) {
-        openFeedbackDialog(Gravity.CENTER);
-    }
 }
