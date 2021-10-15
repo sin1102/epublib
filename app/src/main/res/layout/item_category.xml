@@ -29,16 +29,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
+                android:background="@color/white"
                 android:text="Book 1"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/genre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:text="Its genre" />
+                android:background="@color/white"
+                android:text="Its genre"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
         </LinearLayout>
 

@@ -6,276 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.Display1"
-    android:background="@color/Background">
+    android:background="@color/Background"
+    >
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            tools:context=".View.Home"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:context=".View.Home">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Vietnamese Books"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:text="Vietnamese Books"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
                 android:layout_marginTop="10dp"
                 android:text="English Books"
-                android:textStyle="bold"/>
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:text="All Books"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:text="All Books"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"/>
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
-    </ScrollView>
-
-
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        tools:layout_editor_absoluteX="-16dp"-->
-<!--        tools:layout_editor_absoluteY="-207dp">-->
-
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/txtNewBook"-->
-<!--                android:layout_width="158dp"-->
-<!--                android:layout_height="39dp"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:text="New Books"-->
-<!--                android:textAlignment="viewStart"-->
-<!--                android:textColor="@color/txtcolor"-->
-<!--                android:textSize="20dp"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--            <HorizontalScrollView-->
-<!--                android:id="@+id/horizontalScrollView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="280dp"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                android:layout_marginTop="4dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.0"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/txtNewBook"-->
-<!--                tools:ignore="SpeakableTextPresentCheck">-->
-
-<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent">-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image"-->
-<!--                        android:onClick="image"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"-->
-<!--                        app:srcCompat="@drawable/img"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image1"-->
-<!--                        android:onClick="image1"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/image"-->
-<!--                        app:layout_constraintTop_toTopOf="@+id/image"-->
-<!--                        app:layout_constraintVertical_bias="0.0"-->
-<!--                        app:srcCompat="@drawable/img_1"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image2"-->
-<!--                        android:onClick="image2"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/image1"-->
-<!--                        app:layout_constraintTop_toTopOf="@+id/image1"-->
-<!--                        app:srcCompat="@drawable/img_2"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-
-
-<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-<!--            </HorizontalScrollView>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/txtPopular"-->
-<!--                android:layout_width="158dp"-->
-<!--                android:layout_height="39dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:text="English Books"-->
-<!--                android:textAlignment="viewStart"-->
-<!--                android:textColor="@color/txtcolor"-->
-<!--                android:textSize="20dp"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/txtNewBook"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />-->
-
-<!--            <HorizontalScrollView-->
-<!--                android:id="@+id/h2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="300dp"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/txtPopular">-->
-
-<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent">-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image3"-->
-<!--                        android:onClick="image3"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"-->
-<!--                        app:srcCompat="@drawable/img_3"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image5"-->
-<!--                        android:onClick="image5"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/image3"-->
-<!--                        app:layout_constraintTop_toTopOf="@+id/image3"-->
-<!--                        app:layout_constraintVertical_bias="1.0"-->
-<!--                        app:srcCompat="@drawable/img_5"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image6"-->
-<!--                        android:onClick="image6"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/image5"-->
-<!--                        app:layout_constraintTop_toTopOf="@+id/image5"-->
-<!--                        app:srcCompat="@drawable/img_6"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-<!--            </HorizontalScrollView>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/txtRecent"-->
-<!--                android:layout_width="170dp"-->
-<!--                android:layout_height="39dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:text="Vietnamese Books"-->
-<!--                android:textAlignment="viewStart"-->
-<!--                android:textColor="@color/txtcolor"-->
-<!--                android:textSize="20dp"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/txtPopular"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/h2" />-->
-
-<!--            <HorizontalScrollView-->
-<!--                android:id="@+id/h3"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="300dp"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/txtRecent">-->
-
-<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent">-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image7"-->
-<!--                        android:onClick="image7"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"-->
-<!--                        app:srcCompat="@drawable/img_7"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image8"-->
-<!--                        android:onClick="image8"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/image7"-->
-<!--                        app:layout_constraintTop_toTopOf="@+id/image7"-->
-<!--                        app:srcCompat="@drawable/img_8"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/image9"-->
-<!--                        android:onClick="image9"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:scaleType="fitCenter"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/image8"-->
-<!--                        app:layout_constraintTop_toTopOf="@+id/image8"-->
-<!--                        app:srcCompat="@drawable/img_9"-->
-<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
-<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-<!--            </HorizontalScrollView>-->
-
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-<!--    </ScrollView>-->
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_btn"
