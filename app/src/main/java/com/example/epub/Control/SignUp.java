@@ -22,8 +22,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,9 +34,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
     private Button btnSignUp;
     private ProgressBar progressBar;
     private FirebaseAuth fAuth;
+    private String userID;
+    private FirebaseFirestore fStore;
 
-    private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private DatabaseReference root = db.getReference().child("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
         progressBar = findViewById(R.id.progressBar);
         fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -110,15 +114,23 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(task.isSuccessful()){
-                    HashMap<String, String> userMap = new HashMap<>();
+                    userID = fAuth.getCurrentUser().getUid();
+                    DocumentReference documentReference = fStore.collection("Users").document(userID);
 
-                    userMap.put("name", fullname);
+                    Map<String, Object> userMap = new HashMap<>();
+                    userMap.put("fullname", fullname);
                     userMap.put("email", email);
+                    documentReference.set(userMap);
 
-                    root.push().setValue(userMap);
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+//                    HashMap<String, String> userMap = new HashMap<>();
+//
+//                    userMap.put("name", fullname);
+//                    userMap.put("email", email);
+//
+//                    root.push().setValue(userMap);
 
                     if(user.isEmailVerified()){
                         Toast.makeText(SignUp.this, "Email has been registerd", Toast.LENGTH_SHORT).show();
