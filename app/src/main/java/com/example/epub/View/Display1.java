@@ -86,7 +86,8 @@ public class Display1 extends SideBar {
         mDrawerLayout.addView(v, 0);
 
         bookList = new ArrayList<>();
-
+        List<BookModel> VNBook = new ArrayList<>();
+        List<BookModel> ENBook = new ArrayList<>();
         recyclerView1 = findViewById(R.id.recycler_view1);
         recyclerView2 = findViewById(R.id.recycler_view2);
         recyclerView3 = findViewById(R.id.recycler_view3);
@@ -102,10 +103,10 @@ public class Display1 extends SideBar {
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView3.setLayoutManager(layoutManager3);
 
-        MainAdapter mainAdapter1 = new MainAdapter(bookList, this);
+        MainAdapter mainAdapter1 = new MainAdapter(VNBook, this);
         recyclerView1.setAdapter(mainAdapter1);
 
-        MainAdapter mainAdapter2 = new MainAdapter(bookList, this);
+        MainAdapter mainAdapter2 = new MainAdapter(ENBook, this);
         recyclerView2.setAdapter(mainAdapter2);
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(bookList, this);
@@ -119,6 +120,10 @@ public class Display1 extends SideBar {
                 for (DataSnapshot temp : snapshot.getChildren()) {
                     book = temp.getValue(BookModel.class);
                     bookList.add(book);
+                    if (book.getBookLanguage().equals("Vietnamese"))
+                        VNBook.add(book);
+                    if (book.getBookLanguage().equals("English"))
+                        ENBook.add(book);
                 }
                 mainAdapter1.notifyDataSetChanged();
                 mainAdapter2.notifyDataSetChanged();
