@@ -17,17 +17,17 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-
             android:src="@drawable/img" />
         <TextView
             android:id="@+id/title_book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="6dp"
-            android:textSize="14sp"
             android:textColor="@color/black"
-            android:text="Book 1"
-            android:layout_gravity="center"/>
+            android:background="@color/white"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
 
     </LinearLayout>
 

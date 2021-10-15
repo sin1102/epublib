@@ -16,11 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Epub">
         <activity
-            android:name=".View.Home"
-            android:exported="true" >
-
-        </activity>
-        <activity
             android:name=".Control.ForgotPassword"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -35,6 +30,7 @@
         <activity
             android:name=".View.Library"
             android:exported="true"
+            android:label="LIBRARY"
             android:parentActivityName=".View.SideBar"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
@@ -42,6 +38,7 @@
             android:exported="true" />
         <activity
             android:name=".View.Display1"
+            android:label="HOME"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
