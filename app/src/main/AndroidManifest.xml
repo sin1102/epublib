@@ -17,7 +17,9 @@
         android:theme="@style/Theme.Epub">
         <activity
             android:name=".Testt.Tesstaddd"
-            android:exported="true"/>
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".Control.ForgotPassword"
             android:exported="true"
