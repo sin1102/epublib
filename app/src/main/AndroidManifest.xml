@@ -55,6 +55,11 @@
             android:name=".View.Download"
             android:exported="true"
             android:theme="@style/AppTheme.DownloadLoadBook" />
+
+        <activity
+            android:name=".View.Profile"
+            android:exported="true" />
+
     </application>
 
 </manifest>
