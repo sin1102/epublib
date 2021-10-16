@@ -74,7 +74,7 @@
 
     <TextView
         android:id="@+id/txtTitleUp"
-        android:layout_width="185dp"
+        android:layout_width="150dp"
         android:layout_height="172dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"

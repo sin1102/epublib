@@ -17,13 +17,7 @@
         android:theme="@style/Theme.Epub">
         <activity
             android:name=".Testt.Tesstaddd"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".Control.ForgotPassword"
             android:exported="true"
@@ -49,7 +43,11 @@
             android:name=".View.Display1"
             android:exported="true"
             android:label="HOME">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Control.Reader"

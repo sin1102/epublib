@@ -71,15 +71,15 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         return true;
     }
 //
-//    @Override
-//    public void onBackPressed(){
-//        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
-//            mDrawerLayout.closeDrawer(GravityCompat.START);
-//        }else{
-//            super.onBackPressed();
-//        }
-//
-//    }
+    @Override
+    public void onBackPressed(){
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+
+    }
 //
 //    private void replaceFragment(Fragment fragment){
 //        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
