@@ -6,33 +6,61 @@
     android:layout_height="match_parent"
     android:background="@drawable/book_info_layout">
 
-    <EditText
+    <LinearLayout
         android:id="@+id/txtLanguageUp"
         android:layout_width="292dp"
         android:layout_height="56dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Language"
-        android:textColor="@color/white"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtGenreUp" />
+        app:layout_constraintTop_toBottomOf="@+id/txtGenreUp">
 
-    <EditText
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="56dp"
+            android:gravity="left|center"
+            android:text="Language: "
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="192dp"
+            android:layout_height="56dp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
         android:id="@+id/txtGenreUp"
         android:layout_width="292dp"
         android:layout_height="56dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Genre"
-        android:textColor="@color/white"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAuthorUp" />
+        app:layout_constraintTop_toBottomOf="@+id/edtAuthorUp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="56dp"
+            android:gravity="left|center"
+            android:text="Genre: "
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="192dp"
+            android:layout_height="56dp" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imgCover"
@@ -46,12 +74,14 @@
 
     <TextView
         android:id="@+id/txtTitleUp"
-        android:layout_width="191dp"
-        android:layout_height="174dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="185dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
+        android:text="Kokoro vaf nhuwnxg nguoiwf banj tooif"
         android:textColor="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imgCover"
@@ -77,6 +107,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="68dp"
         android:text="Upload"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

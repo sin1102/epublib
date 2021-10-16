@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name"></string>
+    <string-array name="language">
+        <item>Vietnamese</item>
+        <item>English</item>
+    </string-array>
+
+
+    <string-array name="genre">
+        <item>Fantasy</item>
+        <item>Romance</item>
+        <item>Literature</item>
+        <item>Technology</item>
+    </string-array>
 
     <string name="nav_My_Profile">My Profile</string>
     <string name="nav_Home">Home</string>
