@@ -63,6 +63,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         }
         else if (id == R.id.nav_My_Profile) {
             Intent it = new Intent(this, Profile.class);
+            startActivity(it);
         }
         else if (id == R.id.nav_Change_Password) {
 
