@@ -80,7 +80,6 @@ public class Display1 extends SideBar {
     ImageView bookCover;
     TextView bookTitle;
     RecyclerView recyclerView1, recyclerView2,  recyclerView3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -221,7 +220,6 @@ public class Display1 extends SideBar {
         Bitmap coverImage = BitmapFactory.decodeStream(epub.getCoverImage()
                 .getInputStream());
         bookCover.setImageBitmap(coverImage);
-
         Button btnUpload = dialog.findViewById(R.id.btnUpload);
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override

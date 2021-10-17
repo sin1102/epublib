@@ -54,6 +54,7 @@ public class Reader extends AppCompatActivity {
         select_search = (ImageView) findViewById(R.id.select_search);
         select_share = (ImageView) findViewById(R.id.select_share);
         select_exit = (ImageView) findViewById(R.id.select_exit);
+        ePubReader.getSettings().setDomStorageEnabled(true);
         ePubReader.OpenEpubFile(epub_location);
         ePubReader.GotoPosition(0, (float) 0);
         ePubReader.setEpubReaderListener(new EpubReaderView.EpubReaderListener() {

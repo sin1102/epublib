@@ -35,14 +35,16 @@ import java.util.Map;
 
 public class Profile extends AppCompatActivity {
 
-    EditText txtUsername;
-    TextView txtEmail;
+    EditText txtUsername, txtEmail;
     ImageView imageUser;
     TextView btnUpdate;
+    ImageView btnTurnback;
+
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser fUser;
     StorageReference storageReference;
+
     String userID;
 
     @Override
@@ -55,6 +57,7 @@ public class Profile extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         fUser = fAuth.getCurrentUser();
         userID = fAuth.getCurrentUser().getUid();
+
 
         //Load hình ảnh từ Storage
         StorageReference profileRef =storageReference.child("Users/" + fAuth.getCurrentUser().getUid() + "/profile.jpg");
@@ -74,12 +77,16 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
+
         imageUser = (ImageView) findViewById(R.id.imageUser);
 
         txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        txtEmail = (EditText) findViewById(R.id.txtEmail);
 
         btnUpdate = (TextView) findViewById(R.id.btnUpdate);
+
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,27 +110,41 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
+
         imageUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGallery, 1000);
+                startActivityForResult(openGallery, 10);
             }
         });
+        btnTurnback = (ImageView) findViewById(R.id.btnTurnback);
+        btnTurnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Profile.this, Display1.class));
+            }
+        });
+
+
     }
+
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1000){
+        if(requestCode == 10){
             if(resultCode == Activity.RESULT_OK){
                 Uri imageUri = data.getData();
                 uploadImage(imageUri);
             }
         }
-
     }
+
+
+
 
     private void uploadImage(Uri imageUri) {
         StorageReference fileRef = storageReference.child("Users/" + fAuth.getCurrentUser().getUid() + "/profile.jpg");
@@ -144,4 +165,6 @@ public class Profile extends AppCompatActivity {
             }
         });
     }
+
+
 }
