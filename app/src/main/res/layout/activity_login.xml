@@ -62,17 +62,37 @@
             android:textColor="@color/black"
             android:textSize="14dp" />
 
-        <TextView
-            android:id="@+id/txtForgot"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:orientation="horizontal"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:minHeight="30dp"
-            android:text="Forgot password?"
-            android:textColor="#666666"
-            android:textStyle="italic" />
+            android:layout_marginBottom="10dp">
+
+            <CheckBox
+                android:id="@+id/cbRememberMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remember me"
+                android:textSize="14dp"
+                android:gravity="center"
+                android:textColor="#666666"
+                android:layout_marginStart="16dp"/>
+
+            <TextView
+                android:id="@+id/txtForgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:layout_marginStart="32dp"
+                android:text="Forgot password?"
+                android:textColor="#666666"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+
 
         <Button
             android:id="@+id/btnSignIn"

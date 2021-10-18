@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,18 +29,22 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
+    //Declare variable
     private EditText txtEmail;
     private EditText txtPassword;
+    private CheckBox cbRememberMe;
     private Button btnSignIn, btnSignUp;
     private TextView txtForgotPassword;
     private ProgressBar progressBar;
+
     private FirebaseAuth fAuth;
 
-    //Tạo giao diện
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Register view
         txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
@@ -50,11 +57,46 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         txtForgotPassword = (TextView) findViewById(R.id.txtForgot);
         txtForgotPassword.setOnClickListener(this);
 
+        //Remember me
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("remember", "");
+
+        if(checkbox.equals("true")){
+            startActivity(new Intent(Login.this, Display1.class));
+            finish();
+        }
+        else if(checkbox.equals("false")){
+
+        }
+
+        cbRememberMe = (CheckBox) findViewById(R.id.cbRememberMe);
+        cbRememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if(compoundButton.isChecked()){
+
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "true");
+                    editor.apply();
+                }
+                else if(!compoundButton.isChecked()){
+
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.apply();
+                }
+            }
+        });
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         fAuth =  FirebaseAuth.getInstance();
     }
 
+    //set on click event
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -70,6 +112,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+    //Login
     private void userLogin() {
         String email = txtEmail.getText().toString().trim();
         String password = txtPassword.getText().toString().trim();
@@ -109,14 +152,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.isEmailVerified()){
+                        progressBar.setVisibility(View.GONE);
                         startActivity(new Intent(Login.this, Display1.class));
+                        finish();
                     }
                     else
                     {
                         Toast.makeText(Login.this, "Your account hasn't been verify yet", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 }else{
-                    Toast.makeText(Login.this, "Looks like you don't have account! Please sign up", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Wrong Email or Password! Please try again.", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
@@ -128,6 +175,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         progressBar.setVisibility(View.GONE);
     }
 
+    //close keyboard when click
     private void closeKeyboard() {
         View view = this.getCurrentFocus();
         if(view != null){

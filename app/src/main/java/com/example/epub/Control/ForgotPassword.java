@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -55,8 +56,10 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<Void> task) {
 
                 if(task.isSuccessful()){
+                    startActivity(new Intent(ForgotPassword.this, Login.class));
                     Toast.makeText(ForgotPassword.this, "Email has been sent. Please check your email", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
+                    finish();
                 }
                 else{
                     Toast.makeText(ForgotPassword.this, "Something wrong! Try again", Toast.LENGTH_SHORT).show();

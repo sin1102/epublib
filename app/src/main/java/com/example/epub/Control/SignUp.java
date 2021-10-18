@@ -123,6 +123,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                     userMap.put("fullname", fullname);
                     userMap.put("email", email);
                     documentReference.set(userMap);
+                    progressBar.setVisibility(View.GONE);
 
 
 //                    HashMap<String, String> userMap = new HashMap<>();
@@ -139,6 +140,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                         user.sendEmailVerification();
                         startActivity(new Intent(SignUp.this, Login.class));
                         Toast.makeText(SignUp.this, "Email has been sent. Please check your email to verify your account", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
                 else{
