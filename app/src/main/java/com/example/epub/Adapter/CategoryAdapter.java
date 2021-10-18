@@ -54,35 +54,37 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public Filter getFilter() {
-        return new Filter() {
+        Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                String strSearch = constraint.toString();
-                if (strSearch.isEmpty()){
-                    categories = categoriesList;
+                FilterResults filterResults = new FilterResults();
+                if (constraint == null | constraint.length() == 0) {
+                    filterResults.count = 0;
                 }
                 else{
-                    List<BookModel> list = new ArrayList<>();
-                    for (BookModel bookModel : categoriesList){
-                        if (bookModel.getBookTitle().toLowerCase().contains(strSearch.toLowerCase())){
-                            list.add(bookModel);
+                    String search = constraint.toString().toLowerCase();
+                    List<BookModel> result = new ArrayList<>();
+                    for (BookModel item : categoriesList) {
+                        if (item.getBookTitle().toLowerCase().contains(search)) {
+                            result.add(item);
                         }
                     }
-                    categories = list;
+                    filterResults.count = result.size();
+                    filterResults.values = result;
                 }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = categoriesList;
-
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                //categories.clear();
                 categories = (List<BookModel>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
+        return filter;
     }
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{

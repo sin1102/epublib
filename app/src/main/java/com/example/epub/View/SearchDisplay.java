@@ -38,7 +38,6 @@ public class SearchDisplay extends AppCompatActivity {
     private SearchView searchView;
     private CategoryAdapter categoryAdapter;
     private RecyclerView recyclerView3;
-    CharSequence search="";
 
 
     private StorageReference storageReference;
@@ -65,12 +64,12 @@ public class SearchDisplay extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                categoryAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                categoryAdapter.getFilter().filter(newText);
                 return false;
             }
         });

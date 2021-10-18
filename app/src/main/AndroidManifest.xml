@@ -55,6 +55,8 @@
             android:name=".View.Download"
             android:exported="true"
             android:theme="@style/AppTheme.DownloadLoadBook" />
+        <activity android:name=".View.SearchDisplay"
+            android:exported="true" />
 
         <activity
             android:name=".View.Profile"
