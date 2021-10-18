@@ -1,9 +1,14 @@
 package com.example.epub.Adapter;
 
 import android.content.Intent;
+import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,15 +41,51 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> implements Filterable {
 
-    private List<BookModel> categories;
+    private List<BookModel> categories, categoriesList;
     private Context context;
 
     public CategoryAdapter(List<BookModel> categories, Context context) {
         this.categories = categories;
+        this.categoriesList = categories;
         this.context = context;
     }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+                if (constraint == null | constraint.length() == 0) {
+                    filterResults.count = 0;
+                }
+                else{
+                    String search = constraint.toString().toLowerCase();
+                    List<BookModel> result = new ArrayList<>();
+                    for (BookModel item : categoriesList) {
+                        if (item.getBookTitle().toLowerCase().contains(search)) {
+                            result.add(item);
+                        }
+                    }
+                    filterResults.count = result.size();
+                    filterResults.values = result;
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                //categories.clear();
+                categories = (List<BookModel>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
+    }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

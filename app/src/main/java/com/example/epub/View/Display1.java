@@ -22,12 +22,15 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,6 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.siegmann.epublib.epub.EpubReader;
+import nl.siegmann.epublib.epub.Main;
 
 public class Display1 extends SideBar {
 
@@ -66,6 +70,8 @@ public class Display1 extends SideBar {
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
 
+    ImageButton imageButton;
+
     ProgressDialog progressDialog;
     EditText bookAuthor;
 //    EditText bookGenre;
@@ -74,7 +80,6 @@ public class Display1 extends SideBar {
     ImageView bookCover;
     TextView bookTitle;
     RecyclerView recyclerView1, recyclerView2,  recyclerView3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +94,7 @@ public class Display1 extends SideBar {
         recyclerView1 = findViewById(R.id.recycler_view1);
         recyclerView2 = findViewById(R.id.recycler_view2);
         recyclerView3 = findViewById(R.id.recycler_view3);
+
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
@@ -133,6 +139,8 @@ public class Display1 extends SideBar {
 
             }
         });
+
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab_btn);
@@ -212,7 +220,6 @@ public class Display1 extends SideBar {
         Bitmap coverImage = BitmapFactory.decodeStream(epub.getCoverImage()
                 .getInputStream());
         bookCover.setImageBitmap(coverImage);
-
         Button btnUpload = dialog.findViewById(R.id.btnUpload);
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -303,14 +310,19 @@ public class Display1 extends SideBar {
         });
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.search_action).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
         return true;
     }
 
+    public boolean onOptionsItemSelected (MenuItem item){
+        int id = item.getItemId();
+        if (id == R.id.search_action){
+            Intent intent = new Intent(Display1.this, SearchDisplay.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

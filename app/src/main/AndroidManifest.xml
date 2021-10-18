@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Epub">
-
         <activity
             android:name=".Control.ForgotPassword"
             android:exported="true"
@@ -27,7 +26,13 @@
         <activity
             android:name=".Control.Login"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".View.Library"
             android:exported="true"
@@ -41,11 +46,7 @@
             android:name=".View.Display1"
             android:exported="true"
             android:label="HOME">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Control.Reader"
@@ -54,6 +55,13 @@
             android:name=".View.Download"
             android:exported="true"
             android:theme="@style/AppTheme.DownloadLoadBook" />
+        <activity android:name=".View.SearchDisplay"
+            android:exported="true" />
+
+        <activity
+            android:name=".View.Profile"
+            android:exported="true" />
+
     </application>
 
 </manifest>
