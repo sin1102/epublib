@@ -3,23 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:orientation="vertical"
-    android:padding="30dp"
-    android:gravity="bottom"
+    android:padding="10dp"
     android:background="@color/LayoutHeader">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageUser"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@mipmap/ic_launcher">
 
-    </ImageView>
+    </de.hdodenhof.circleimageview.CircleImageView>
 
-    <TextView
+    <EditText
+        android:id="@+id/txtFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Accout Name"
-        android:textSize="16dp"
+        android:hint="Your full name"
         android:textStyle="bold"
-        android:textColor="@color/white">
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:focusableInTouchMode="false"
+        android:focusable="false"/>
 
-    </TextView>
+
 </LinearLayout>

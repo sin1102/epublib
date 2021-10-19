@@ -46,7 +46,8 @@
         app:menu="@menu/menu_nav"
         app:itemBackground="@color/white"
         app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black" />
+        app:itemTextColor="@color/black"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 
 
