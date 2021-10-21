@@ -20,10 +20,13 @@
 
     <SearchView
         android:id="@+id/search_field"
-        android:layout_width="282dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading_lable"
         android:layout_alignStart="@id/heading_lable"
-        android:layout_marginTop="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/search_outline"
         android:iconifiedByDefault="false"
         android:queryHint="Search here..."
@@ -33,6 +36,7 @@
         android:id="@+id/recycler_view3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp" />
+        android:layout_below="@+id/search_field"
+        android:layout_marginTop="30dp" />
 
 </RelativeLayout>
