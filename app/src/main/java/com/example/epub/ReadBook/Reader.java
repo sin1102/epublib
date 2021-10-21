@@ -1,4 +1,4 @@
-package com.example.epub.Control;
+package com.example.epub.ReadBook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.epub.R;
-import com.example.epub.View.EpubReaderView;
+import com.example.epub.ReadBook.EpubReaderView;
 
 import org.json.JSONObject;
 

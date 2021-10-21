@@ -1,4 +1,4 @@
-package com.example.epub.Control;
+package com.example.epub.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epub.R;
-import com.example.epub.View.Display1;
-import com.example.epub.View.SideBar;
+import com.example.epub.Display.Display1;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

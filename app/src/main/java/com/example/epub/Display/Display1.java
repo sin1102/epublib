@@ -1,4 +1,4 @@
-package com.example.epub.View;
+package com.example.epub.Display;
 
 
 import androidx.annotation.NonNull;
@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,24 +36,20 @@ import android.widget.Toast;
 
 import com.example.epub.Adapter.CategoryAdapter;
 import com.example.epub.Adapter.MainAdapter;
-import com.example.epub.Model.BookModel;
+import com.example.epub.ReadBook.BookModel;
 import com.example.epub.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -64,7 +58,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.siegmann.epublib.epub.EpubReader;
-import nl.siegmann.epublib.epub.Main;
 
 public class Display1 extends SideBar {
 
@@ -178,11 +171,6 @@ public class Display1 extends SideBar {
 
         }
     }
-
-
-
-    //Hàm mở dialog
-
 
     //Show popup UpLoad
     private void openUpLoad(int gravity, String bookDir, Uri uri) throws Exception {
@@ -328,6 +316,7 @@ public class Display1 extends SideBar {
             startActivity(intent);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

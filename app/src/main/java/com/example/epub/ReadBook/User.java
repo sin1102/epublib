@@ -1,4 +1,4 @@
-package com.example.epub.Model;
+package com.example.epub.ReadBook;
 
 import android.graphics.Bitmap;
 

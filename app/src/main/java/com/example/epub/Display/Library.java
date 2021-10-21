@@ -1,4 +1,4 @@
-package com.example.epub.View;
+package com.example.epub.Display;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.example.epub.Adapter.UserAdapter;
 import com.example.epub.R;
-import com.example.epub.Model.User;
+import com.example.epub.ReadBook.User;
 
 import java.io.BufferedInputStream;
 import java.io.File;

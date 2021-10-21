@@ -1,4 +1,4 @@
-package com.example.epub.View;
+package com.example.epub.Display;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

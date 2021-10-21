@@ -13,8 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epub.R;
-import com.example.epub.Control.Reader;
-import com.example.epub.Model.User;
+import com.example.epub.ReadBook.Reader;
+import com.example.epub.ReadBook.User;
 
 import java.util.List;
 

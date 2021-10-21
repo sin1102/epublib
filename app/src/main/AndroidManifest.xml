@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.epub" >
+    package="com.example.epub">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -14,23 +14,23 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Epub" >
+        android:theme="@style/Theme.Epub">
         <activity
-            android:name=".View.ChangePassword"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity
-            android:name=".Control.ForgotPassword"
+            android:name=".User.ChangePassword"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Control.SignUp"
+            android:name=".User.ForgotPassword"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Control.Login"
+            android:name=".User.SignUp"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".User.Login"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,34 +38,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".View.Library"
+            android:name=".Display.Library"
             android:exported="true"
             android:label="LIBRARY"
-            android:parentActivityName=".View.SideBar"
+            android:parentActivityName=".Display.SideBar"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".View.SideBar"
+            android:name=".Display.SideBar"
             android:exported="true" />
         <activity
-            android:name=".View.Display1"
+            android:name=".Display.Display1"
             android:exported="true"
             android:label="HOME"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Control.Reader"
+            android:name=".ReadBook.Reader"
             android:exported="true" />
         <activity
-            android:name=".View.Download"
+            android:name=".Display.Download"
             android:exported="true"
             android:theme="@style/AppTheme.DownloadLoadBook" />
         <activity
-            android:name=".View.SearchDisplay"
+            android:name=".Display.SearchDisplay"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".View.Profile"
+            android:name=".Display.Profile"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

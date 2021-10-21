@@ -1,10 +1,4 @@
-package com.example.epub.Model;
-
-import android.view.View;
-import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.epub.ReadBook;
 
 public class Book {
     int image;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Control.Reader">
+    tools:context=".ReadBook.Reader">
 
     <LinearLayout
         android:id="@+id/bottom_bar"
@@ -94,7 +94,7 @@
             android:src="@drawable/ic_close"/>
     </LinearLayout>
 
-    <com.example.epub.View.EpubReaderView
+    <com.example.epub.ReadBook.EpubReaderView
         android:id="@+id/epub_reader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

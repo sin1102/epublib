@@ -1,4 +1,4 @@
-package com.example.epub.View;
+package com.example.epub.Display;
 
 import android.app.Activity;
 import android.app.DownloadManager;
@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.epub.Model.BookModel;
+import com.example.epub.ReadBook.BookModel;
 import com.example.epub.R;
 import com.squareup.picasso.Picasso;
 
