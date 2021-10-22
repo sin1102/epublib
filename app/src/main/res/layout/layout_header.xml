@@ -5,24 +5,6 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:background="@color/LayoutHeader">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageUser"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher">
-
-    </de.hdodenhof.circleimageview.CircleImageView>
-
-    <EditText
-        android:id="@+id/txtFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Your full name"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:focusableInTouchMode="false"
-        android:focusable="false"/>
 
 
 </LinearLayout>

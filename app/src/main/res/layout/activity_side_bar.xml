@@ -31,8 +31,7 @@
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
@@ -47,7 +46,33 @@
         app:itemBackground="@color/white"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageUser"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_margin="30dp"/>
+
+        <TextView
+            android:id="@+id/txtFullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textColor="@color/white"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="45dp"/>
+
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColor="@color/white"
+            android:layout_marginTop="140dp"
+            android:layout_marginLeft="45dp"/>
+    </com.google.android.material.navigation.NavigationView>
 
 
 
