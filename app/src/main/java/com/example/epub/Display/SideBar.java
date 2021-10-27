@@ -162,18 +162,22 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
             case R.id.nav_Home:
                 Intent it = new Intent(this, Display1.class);
                 startActivity(it);
+                this.finish();
                 break;
             case R.id.nav_Library:
                 Intent t = new Intent(this, Library.class);
                 startActivity(t);
+                this.finish();
                 break;
             case R.id.nav_My_Profile:
                 Intent myProfile = new Intent(this, Profile.class);
                 startActivity(myProfile);
+                this.finish();
                 break;
             case R.id.nav_Change_Password:
                 Intent intent = new Intent(this, ChangePassword.class);
                 startActivity(intent);
+                this.finish();
                 break;
             case R.id.nav_Log_Out:
 
@@ -182,7 +186,7 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
                 editor.putString("remember", "false");
                 editor.apply();
 
-                finish();
+                this.finish();
 
             default:
                 return true;
