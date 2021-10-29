@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.epub.ReadBook.BookModel;
 import com.example.epub.R;
@@ -58,6 +59,8 @@ public class Download extends Activity {
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, book.getBookTitle() + ".epub");
                 DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 manager.enqueue(request);
+                Toast.makeText(Download.this, "Downloading....", Toast.LENGTH_SHORT).show();
+                Download.this.finish();
             }
         });
     }

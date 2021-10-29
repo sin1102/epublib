@@ -1,12 +1,15 @@
 package com.example.epub.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,6 +19,7 @@ import com.example.epub.R;
 import com.example.epub.ReadBook.Reader;
 import com.example.epub.ReadBook.User;
 
+import java.io.File;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
@@ -55,6 +59,30 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             @Override
             public void onClick(View view) {
                 onClickReadBook(user);
+            }
+        });
+        holder.bookCard.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog dialog = new AlertDialog.Builder(mContext)
+                        .setTitle("Delete book")
+                        .setMessage("Do you want delete this book?")
+                        .setPositiveButton("Yes", null)
+                        .setNegativeButton("No", null)
+                        .show();
+                Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        File file = new File(user.getBookDir());
+                        boolean deleted = file.delete();
+                        mListUser.remove(holder.getAdapterPosition());
+                        notifyItemRemoved(holder.getAdapterPosition());
+                        Toast.makeText(mContext, "Delete success", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+                return false;
             }
         });
     }
