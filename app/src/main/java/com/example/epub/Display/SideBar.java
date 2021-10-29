@@ -177,7 +177,6 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
             case R.id.nav_Change_Password:
                 Intent intent = new Intent(this, ChangePassword.class);
                 startActivity(intent);
-                this.finish();
                 break;
             case R.id.nav_Log_Out:
 

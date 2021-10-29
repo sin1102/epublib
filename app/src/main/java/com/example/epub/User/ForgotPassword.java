@@ -18,8 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPassword extends AppCompatActivity implements View.OnClickListener{
-
+public class ForgotPassword extends AppCompatActivity{
     private ProgressBar progressBar;
     private EditText txtEmail;
     private Button btnSendEmail;
@@ -31,12 +30,24 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_forgot_password);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
         txtEmail = (EditText) findViewById(R.id.txtEmail);
 
         btnSendEmail = (Button) findViewById(R.id.btnSendEmail);
         fAuth = FirebaseAuth.getInstance();
 
+        btnSendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetPassword();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.GONE);
     }
 
     private void resetPassword() {
@@ -48,18 +59,17 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
         closeKeyboard();
-
+        progressBar.setVisibility(View.VISIBLE);
         fAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
                 if(task.isSuccessful()){
                     startActivity(new Intent(ForgotPassword.this, Login.class));
-                    Toast.makeText(ForgotPassword.this, "Email has been sent. Please check your email", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(ForgotPassword.this, "Please check your email to change password", Toast.LENGTH_SHORT).show();
                     finish();
+                    progressBar.setVisibility(View.GONE);
                 }
                 else{
                     Toast.makeText(ForgotPassword.this, "Something wrong! Try again", Toast.LENGTH_SHORT).show();
@@ -76,12 +86,4 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnSendEmail:
-                resetPassword();
-                break;
-        }
-    }
 }

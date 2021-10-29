@@ -137,6 +137,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Profile.this, Display1.class));
+                finish();
             }
         });
 
