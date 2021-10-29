@@ -186,7 +186,9 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
                 editor.putString("remember", "false");
                 editor.apply();
 
+                startActivity(new Intent(this, Login.class));
                 this.finish();
+                break;
 
             default:
                 return true;
