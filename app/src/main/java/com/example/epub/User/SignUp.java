@@ -133,6 +133,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
                     if(user.isEmailVerified()){
                         Toast.makeText(SignUp.this, "Email has been registerd", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                     else{
                         user.sendEmailVerification();
