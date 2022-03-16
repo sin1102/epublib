@@ -94,7 +94,7 @@
             android:src="@drawable/ic_close"/>
     </LinearLayout>
 
-    <com.example.epub.ReadBook.EpubReaderView
+    <com.example.epub.Display.EpubReaderView
         android:id="@+id/epub_reader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

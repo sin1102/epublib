@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.epub.R;
-import com.example.epub.ReadBook.EpubReaderView;
+import com.example.epub.Display.EpubReaderView;
 
 import org.json.JSONObject;
 

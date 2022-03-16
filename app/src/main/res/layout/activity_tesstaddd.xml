@@ -29,7 +29,7 @@
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="192dp"
-            android:layout_height="56dp" />
+            android:layout_height="56dp"/>
 
     </LinearLayout>
 

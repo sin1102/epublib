@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -117,7 +118,9 @@ public class Display1 extends SideBar {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 BookModel book = new BookModel();
-
+                VNBook.clear();
+                ENBook.clear();
+                bookList.clear();
                 for (DataSnapshot temp : snapshot.getChildren()) {
                     book = temp.getValue(BookModel.class);
                     bookList.add(book);
@@ -149,9 +152,8 @@ public class Display1 extends SideBar {
 //                startActivityForResult(chooseFile, 2);
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                //intent.setType("*/*");
-                //intent.addCategory(Intent.CATEGORY_OPENABLE);
-                //intent = Intent.createChooser(intent, "Choose Books");
+                intent.setType("*/*");
+                intent = Intent.createChooser(intent, "Choose Books");
                 startActivityForResult(intent, 2);
 
             }
@@ -159,18 +161,27 @@ public class Display1 extends SideBar {
 
     }
 
+    protected void onStart() {
+
+        super.onStart();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
             try {
-                openUpLoad(Gravity.CENTER, data.getData().getPath(), data.getData());
+                String[] path = data.getData().getPath().split(":");
+                Toast.makeText(this, path[1], Toast.LENGTH_SHORT).show();
+                openUpLoad(Gravity.CENTER, path[1], data.getData());
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
     }
+
+
 
     //Show popup UpLoad
     private void openUpLoad(int gravity, String bookDir, Uri uri) throws Exception {
@@ -202,12 +213,12 @@ public class Display1 extends SideBar {
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.language, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bookLanguage.setAdapter(adapter1);
-
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.genre, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bookGenre.setAdapter(adapter2);
 
-        InputStream bookStream = new BufferedInputStream(new FileInputStream(bookDir));
+        //InputStream bookStream = new BufferedInputStream(new FileInputStream(bookDir));
+        InputStream bookStream = getContentResolver().openInputStream(uri);
         nl.siegmann.epublib.domain.Book epub = new EpubReader().readEpub(bookStream);
         bookTitle.setText(epub.getTitle());
         Bitmap coverImage = BitmapFactory.decodeStream(epub.getCoverImage()
@@ -319,4 +330,5 @@ public class Display1 extends SideBar {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
