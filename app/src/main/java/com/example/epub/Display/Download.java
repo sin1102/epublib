@@ -21,28 +21,31 @@ import com.squareup.picasso.Picasso;
 
 public class Download extends Activity {
 
-    TextView bookAuthor, bookTitle, bookLanguage, bookGenre;
-    ImageView bookCover;
+    TextView bookAuthor, bookTitle, bookLanguage, bookGenre, sum;
+    ImageView bookCover, bgCover;
     Button btnDown;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.book_information);
+        setContentView(R.layout.activity_dowload_book);
 
-        bookAuthor = findViewById(R.id.txtAuthor);
-        bookTitle = findViewById(R.id.txtBookName);
-        bookLanguage = findViewById(R.id.txtLanguage);
-        bookGenre = findViewById(R.id.txtType);
-        bookCover = findViewById(R.id.imageView);
+        bookAuthor = findViewById(R.id.book_Author);
+        bookTitle = findViewById(R.id.book_name);
+        bookLanguage = findViewById(R.id.book_Language);
+        bookGenre = findViewById(R.id.genre);
+        bookCover = findViewById(R.id.manga_cover);
+        bgCover = findViewById(R.id.backdrop);
         btnDown = findViewById(R.id.btnDownload);
+        sum = findViewById(R.id.subtitle);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         Intent it = getIntent();
         BookModel book = (BookModel) it.getSerializableExtra("BOOK");
         Picasso.get().load(book.getBookCover()).into(bookCover);
+        Picasso.get().load(book.getBookCover()).into(bgCover);
         bookGenre.setText(book.getBookGenre());
         bookLanguage.setText(book.getBookLanguage());
         bookTitle.setText(book.getBookTitle());
