@@ -96,7 +96,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The loai: "
+            android:text="Genre: "
+            android:textStyle="bold"
             android:textSize="18sp"/>
         <TextView
             android:layout_width="wrap_content"
@@ -107,34 +108,42 @@
 
     </LinearLayout>
 
-    <!--    <androidx.constraintlayout.widget.Barrier-->
-<!--        android:id="@+id/manga_info_barrier"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:barrierDirection="bottom"-->
-<!--        app:constraint_referenced_ids="manga_cover,name_txt" />-->
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="Description :"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_Type"
+        app:layout_constraintBottom_toTopOf="@+id/scr_text"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scr_text"
         android:layout_width="401dp"
-        android:layout_height="420dp"
-        android:layout_marginTop="-140dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toTopOf="@+id/manga_actions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_Type">
+        app:layout_constraintTop_toBottomOf="@id/txtDescription">
 
-        <TextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
             android:id="@+id/subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="18dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginRight="18dp"
             android:alpha="0.5"
+            android:textAlignment="center"
             android:text="Để chuẩn bị cho năm học mới, mẹ em đã đưa em đi mua những đồ dùng cần thiết như: bảng đen, bút chì, thước kẻ và không thể thiếu đi cục tẩy. Em bước vào cửa hàng sách thứ đầu tiên em đi tìm chính là gian hàng bán những cục tẩy nhỏ xinh. Trước mặt em bày ra vô số cụ tẩy với hình dáng, màu sắc và kích thước khác nhau. Em ấn tượng với cục tẩy màu xanh da trời, cục tẩy này có dạng hình khối trông như một cục kẹo cao su. Em cầm cục tẩy lên, nó có kích thước chỉ khoảng 3 xăng ti mét, độ dày 1 xăng ti mét. Em cầm và cảm nhận được nó rắn chắc nhưng lại mềm dẻo một cách kì lạ, không thể bẻ gãy hay làm méo mó biến dạng. Cục tẩy tỏa ra mùi thơm giống như kẹo, em thích mùi thơm đó và quyết định nhờ mẹ mua cho cục tẩy này. Em sẽ dùng cục tẩy này để xóa đi những nét bút chì viết chữ chưa đẹp, những nét vẽ còn nguệch ngoạc của mình, hy vọng nó sẽ giúp ích cho em trong quá trình học tập."
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -163,7 +172,8 @@
             android:textColor="@color/white"
             android:background="@color/LayoutHeader"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20sp"/>
 
     </LinearLayout>
 
