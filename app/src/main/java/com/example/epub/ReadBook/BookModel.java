@@ -9,6 +9,16 @@ public class BookModel implements Serializable {
     private String bookLanguage;
     private String bookGenre;
     private String bookURL;
+    private String bookContent;
+
+
+    public String getBookContent() {
+        return bookContent;
+    }
+
+    public void setBookContent(String bookContent) {
+        this.bookContent = bookContent;
+    }
 
     public String getBookURL() {
         return bookURL;

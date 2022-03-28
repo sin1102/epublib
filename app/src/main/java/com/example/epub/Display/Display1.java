@@ -171,9 +171,12 @@ public class Display1 extends SideBar {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
             try {
-                String[] path = data.getData().getPath().split(":");
-                Toast.makeText(this, path[1], Toast.LENGTH_SHORT).show();
-                openUpLoad(Gravity.CENTER, path[1], data.getData());
+//                String[] path = data.getData().getPath().split(":");
+//                Toast.makeText(this, path[1], Toast.LENGTH_SHORT).show();
+//                openUpLoad(Gravity.CENTER, path[1], data.getData());
+                Intent it = new Intent(this, Uploadbook.class);
+                it.putExtra("bookuri", data.getData().toString());
+                startActivity(it);
             } catch (Exception e) {
                 e.printStackTrace();
             }

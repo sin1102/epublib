@@ -50,6 +50,7 @@ public class Download extends Activity {
         bookLanguage.setText(book.getBookLanguage());
         bookTitle.setText(book.getBookTitle());
         bookAuthor.setText(book.getBookAuthor());
+        sum.setText(book.getBookContent());
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

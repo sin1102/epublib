@@ -72,6 +72,10 @@
             android:name=".Display.Profile"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Display.Uploadbook"
+            android:exported="true"
+            />
     </application>
 
 </manifest>
