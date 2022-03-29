@@ -38,6 +38,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Email"
+            android:textColorHint="#999999"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:paddingStart="10dp"
@@ -56,6 +57,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Password"
+            android:textColorHint="#999999"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingStart="10dp"
@@ -77,6 +79,7 @@
                 android:textSize="14dp"
                 android:gravity="center"
                 android:textColor="#666666"
+                android:buttonTint="#666666"
                 android:layout_marginStart="16dp"/>
 
             <TextView

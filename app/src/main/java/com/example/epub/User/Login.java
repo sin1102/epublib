@@ -118,7 +118,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         BiometricManager biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate(BIOMETRIC_STRONG | DEVICE_CREDENTIAL)) {
             case BiometricManager.BIOMETRIC_SUCCESS:
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
                 break;
             case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
                 Log.e("MY_APP_TAG", "No biometric features available on this device.");
@@ -142,6 +141,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             public void onAuthenticationError(int errorCode,
                                               @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(Login.this, "Log out", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -149,6 +149,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 startActivity(new Intent(Login.this, Display1.class));
+                Login.this.finish();
                 Toast.makeText(getApplicationContext(),
                         "Login Successful!", Toast.LENGTH_SHORT).show();
             }
