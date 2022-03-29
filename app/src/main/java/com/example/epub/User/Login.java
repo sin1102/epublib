@@ -1,12 +1,20 @@
 package com.example.epub.User;
 
+import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG;
+import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +35,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.concurrent.Executor;
+
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
     //Declare variable
+    private static final int REQUEST_CODE = 101010;
+    private ImageView imgFingerprint;
+    private Executor executor;
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+
+
     private EditText txtEmail;
     private EditText txtPassword;
     private CheckBox cbRememberMe;
@@ -42,6 +60,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Fingerprint
+        imgFingerprint = findViewById(R.id.imgFingerprint);
 
         //Register view
         txtEmail = (EditText) findViewById(R.id.txtEmail);
@@ -93,6 +114,68 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         fAuth =  FirebaseAuth.getInstance();
+
+        BiometricManager biometricManager = BiometricManager.from(this);
+        switch (biometricManager.canAuthenticate(BIOMETRIC_STRONG | DEVICE_CREDENTIAL)) {
+            case BiometricManager.BIOMETRIC_SUCCESS:
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                Log.e("MY_APP_TAG", "No biometric features available on this device.");
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                Toast.makeText(this, "Sensor not avail or busy", Toast.LENGTH_SHORT).show();
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                // Prompts the user to create credentials that your app accepts.
+                final Intent enrollIntent = new Intent(Settings.ACTION_BIOMETRIC_ENROLL);
+                enrollIntent.putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                        BIOMETRIC_STRONG | DEVICE_CREDENTIAL);
+                startActivityForResult(enrollIntent, REQUEST_CODE);
+                break;
+        }
+
+        executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(Login.this,
+                executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode,
+                                              @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(
+                    @NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                startActivity(new Intent(Login.this, Display1.class));
+                Toast.makeText(getApplicationContext(),
+                        "Login Successful!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(getApplicationContext(), "Login Failed!",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for my app")
+                .setSubtitle("Log in using your biometric credential")
+                .setNegativeButtonText("Use account password")
+                .build();
+
+        // Prompt appears when user clicks "Log in".
+        // Consider integrating with the keystore to unlock cryptographic operations,
+        // if needed by your app.
+
+
+        imgFingerprint.setOnClickListener(view -> {
+            biometricPrompt.authenticate(promptInfo);
+        });
     }
 
     //set on click event

@@ -50,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/manga_cover"
         app:layout_constraintTop_toTopOf="@id/backdrop"
-        app:layout_constraintVertical_bias="0.384">
+        app:layout_constraintVertical_bias="0.228">
 
         <TextView
             android:id="@+id/book_name"
@@ -143,7 +143,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:alpha="0.5"
-            android:textAlignment="center"
             android:text="Để chuẩn bị cho năm học mới, mẹ em đã đưa em đi mua những đồ dùng cần thiết như: bảng đen, bút chì, thước kẻ và không thể thiếu đi cục tẩy. Em bước vào cửa hàng sách thứ đầu tiên em đi tìm chính là gian hàng bán những cục tẩy nhỏ xinh. Trước mặt em bày ra vô số cụ tẩy với hình dáng, màu sắc và kích thước khác nhau. Em ấn tượng với cục tẩy màu xanh da trời, cục tẩy này có dạng hình khối trông như một cục kẹo cao su. Em cầm cục tẩy lên, nó có kích thước chỉ khoảng 3 xăng ti mét, độ dày 1 xăng ti mét. Em cầm và cảm nhận được nó rắn chắc nhưng lại mềm dẻo một cách kì lạ, không thể bẻ gãy hay làm méo mó biến dạng. Cục tẩy tỏa ra mùi thơm giống như kẹo, em thích mùi thơm đó và quyết định nhờ mẹ mua cho cục tẩy này. Em sẽ dùng cục tẩy này để xóa đi những nét bút chì viết chữ chưa đẹp, những nét vẽ còn nguệch ngoạc của mình, hy vọng nó sẽ giúp ích cho em trong quá trình học tập."
             android:textColor="@color/black"
             android:textSize="18sp" />
