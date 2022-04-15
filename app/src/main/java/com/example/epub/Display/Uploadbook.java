@@ -27,6 +27,8 @@ import com.example.epub.ReadBook.BookModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -47,6 +49,10 @@ public class Uploadbook extends AppCompatActivity {
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
+
+    FirebaseAuth fAuth;
+    FirebaseUser fUser;
+
 
     String genre;
     MaterialCardView selectCard;
@@ -184,6 +190,10 @@ public class Uploadbook extends AppCompatActivity {
         progressDialog.setMessage("Uploading");
         progressDialog.setProgressStyle(progressDialog.STYLE_HORIZONTAL);
 
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+
+
         BookModel book = new BookModel();
         String[] bookDir = uri.getPath().split("/");
         Log.w("failed", bookDir[bookDir.length - 1]);
@@ -221,6 +231,7 @@ public class Uploadbook extends AppCompatActivity {
                         book.setBookLanguage(language.getSelectedItem().toString());
                         book.setBookURL(uri.toString());
                         book.setBookContent(content.getText().toString());
+                        book.setuID(fUser.getUid());
                         String bookID = databaseReference.push().getKey();
                         databaseReference.child(bookID).setValue(book);
                         Toast.makeText(Uploadbook.this, "Upload Successfully!", Toast.LENGTH_SHORT).show();
