@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Epub">
         <activity
+            android:name=".UploadedBook.EditUploadedBookActivity"
+            android:exported="true" />
+        <activity
             android:name=".Display.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -40,9 +43,7 @@
         <activity
             android:name=".User.Login"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Display.Library"
             android:exported="true"
@@ -53,10 +54,15 @@
             android:name=".Display.SideBar"
             android:exported="true" />
         <activity
+            android:name=".Display.UploadedBookDisplay"
+            android:exported="true"
+            android:label="YOUR UPLOADED BOOKS"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".Display.Display1"
             android:exported="true"
             android:label="HOME"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".ReadBook.Reader"
             android:exported="true" />
@@ -74,8 +80,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Display.Uploadbook"
-            android:exported="true"
-            />
+            android:exported="true" />
     </application>
 
 </manifest>

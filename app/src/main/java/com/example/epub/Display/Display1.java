@@ -142,7 +142,6 @@ public class Display1 extends SideBar {
 
 
 
-
         FloatingActionButton fab = findViewById(R.id.fab_btn);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,8 +8,12 @@
             />
 
         <item android:id="@+id/nav_Library"
-            android:title="@string/navigation_Library"
+            android:title="YOUR LIBRARY"
             android:icon="@drawable/book"/>
+
+        <item android:id="@+id/nav_Uploaded"
+            android:title="YOUR UPLOADED BOOKS"
+            android:icon="@drawable/upload"/>
     </group>
 
     <item android:title="@string/nav_Account">

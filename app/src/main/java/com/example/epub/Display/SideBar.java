@@ -108,11 +108,6 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
         navigationView.getMenu().findItem(R.id.nav_Home).setChecked(true);
         navigationView.setCheckedItem(R.id.nav_Home);
 
-
-
-
-
-
     }
 
 
@@ -160,13 +155,18 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_Home:
-                Intent it = new Intent(this, Display1.class);
-                startActivity(it);
+                Intent a = new Intent(this, Display1.class);
+                startActivity(a);
                 this.finish();
                 break;
             case R.id.nav_Library:
-                Intent t = new Intent(this, Library.class);
-                startActivity(t);
+                Intent b = new Intent(this, Library.class);
+                startActivity(b);
+                this.finish();
+                break;
+            case R.id.nav_Uploaded:
+                Intent c = new Intent(this, UploadedBookDisplay.class);
+                startActivity(c);
                 this.finish();
                 break;
             case R.id.nav_My_Profile:
