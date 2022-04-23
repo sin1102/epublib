@@ -16,17 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Epub">
         <activity
-            android:name=".UploadedBook.EditUploadedBookActivity"
+            android:name=".Display.EditUploadedBookActivity"
             android:exported="true" />
         <activity
             android:name=".Display.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".User.ChangePassword"
@@ -62,7 +57,13 @@
             android:name=".Display.Display1"
             android:exported="true"
             android:label="HOME"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ReadBook.Reader"
             android:exported="true" />

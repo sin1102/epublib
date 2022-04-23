@@ -15,9 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epub.Adapter.BookUploadAdapter;
 import com.example.epub.R;
-import com.example.epub.UploadedBook.BookUpload;
+import com.example.epub.ReadBook.BookModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -25,15 +32,20 @@ import java.util.List;
 
 public class UploadedBookDisplay extends SideBar {
 
-    private List<BookUpload> bookUploadList;
+    private List<BookModel> bookUploadList;
     private RecyclerView rcvUploadedBook;
     private BookUploadAdapter bookUploadAdapter;
     private LinearLayoutManager linearLayoutManager;
+    private StorageReference storageReference;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth fAuth;
+    private FirebaseUser fUser;
 
     @Override
     protected void onCreate (Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_uploaded_book);
+
 
         rcvUploadedBook = (RecyclerView)findViewById(R.id.rcv_uploaded_book);
         linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -44,19 +56,35 @@ public class UploadedBookDisplay extends SideBar {
 
     private void generateItem() {
 
-        List<BookUpload> bookUploadList = new ArrayList<>();
+        storageReference = FirebaseStorage.getInstance().getReference("uploads");
+        databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
-        bookUploadList.add(new BookUpload("Book 1","Author 1", R.id.image));
-        bookUploadList.add(new BookUpload("Book 2","Author 2", R.id.image));
-        bookUploadList.add(new BookUpload("Book 3","Author 3", R.id.image));
-        bookUploadList.add(new BookUpload("Book 4","Author 4", R.id.image));
-        bookUploadList.add(new BookUpload("Book 5","Author 5", R.id.image));
-        bookUploadList.add(new BookUpload("Book 6","Author 6", R.id.image));
-        bookUploadList.add(new BookUpload("Book 7","Author 7", R.id.image));
-        bookUploadList.add(new BookUpload("Book 8","Author 8", R.id.image));
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+
+        List<BookModel> bookUploadList = new ArrayList<>();
 
         bookUploadAdapter = new BookUploadAdapter(this, bookUploadList);
         rcvUploadedBook.setAdapter(bookUploadAdapter);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                BookModel book = new BookModel();
+                bookUploadList.clear();
+                for (DataSnapshot temp : snapshot.getChildren()) {
+                    book = temp.getValue(BookModel.class);
+                    if (book.getuID().equals(fUser.getUid()))
+                        bookUploadList.add(book);
+                }
+                bookUploadAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }
