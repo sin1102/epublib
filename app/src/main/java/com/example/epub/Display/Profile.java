@@ -137,7 +137,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Profile.this, Display1.class));
-                finish();
+                finishAffinity();
             }
         });
 
@@ -154,8 +154,6 @@ public class Profile extends AppCompatActivity {
             }
         }
     }
-
-
 
     //Upload image from this into firebase
     private void uploadImage(Uri imageUri) {

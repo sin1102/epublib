@@ -30,19 +30,19 @@
         </activity>
         <activity
             android:name=".User.ChangePassword"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".User.ForgotPassword"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".User.SignUp"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".User.Login"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Display.Library"

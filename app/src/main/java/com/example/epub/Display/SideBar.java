@@ -22,7 +22,6 @@ import com.example.epub.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -39,21 +38,15 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
 //
 //    private int mCurrent = HOME;
 
-
     public DrawerLayout mDrawerLayout;
     public NavigationView navigationView;
-
 
     ImageView imageUser;
     TextView txtFullname;
     TextView txtEmail;
-
     StorageReference storageReference;
-
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    FirebaseUser fUser;
-
     String userID;
 
     @Override
@@ -61,10 +54,7 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_side_bar);
 
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-
 
         setSupportActionBar(toolbar);
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -78,14 +68,20 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
         txtFullname = (TextView) findViewById(R.id.txtFullname);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
 
-
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
-        fUser = fAuth.getCurrentUser();
         userID = fAuth.getCurrentUser().getUid();
+        displayProfile();
 
-        StorageReference profileRef = storageReference.child("Users/" + fAuth.getCurrentUser().getUid()+ "/profile.jpg");
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().findItem(R.id.nav_Home).setChecked(true);
+        navigationView.setCheckedItem(R.id.nav_Home);
+
+    }
+
+    private void displayProfile(){
+        StorageReference profileRef = storageReference.child("Users/" + userID + "/profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -101,16 +97,7 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
                 txtEmail.setText(value.getString("email"));
             }
         });
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //replaceFragment(new HomeFrg());
-        navigationView.getMenu().findItem(R.id.nav_Home).setChecked(true);
-        navigationView.setCheckedItem(R.id.nav_Home);
-
     }
-
-
 //    @Override
 //    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //        int id = item.getItemId();
@@ -142,7 +129,6 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
         }else{
             super.onBackPressed();
         }
-
     }
 
 //    private void replaceFragment(Fragment fragment){
@@ -162,36 +148,31 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
             case R.id.nav_Library:
                 Intent b = new Intent(this, Library.class);
                 startActivity(b);
-                this.finish();
                 break;
             case R.id.nav_Uploaded:
                 Intent c = new Intent(this, UploadedBookDisplay.class);
                 startActivity(c);
-                this.finish();
                 break;
             case R.id.nav_My_Profile:
                 Intent myProfile = new Intent(this, Profile.class);
                 startActivity(myProfile);
-                this.finish();
                 break;
             case R.id.nav_Change_Password:
                 Intent intent = new Intent(this, ChangePassword.class);
                 startActivity(intent);
                 break;
             case R.id.nav_Log_Out:
-
                 SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("remember", "false");
                 editor.apply();
 
                 startActivity(new Intent(this, Login.class));
+                fAuth.signOut();
                 this.finish();
                 break;
-
             default:
                 return true;
-
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;

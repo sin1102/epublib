@@ -46,7 +46,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
 
-
     private EditText txtEmail;
     private EditText txtPassword;
     private CheckBox cbRememberMe;
@@ -67,15 +66,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         //Register view
         txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
-
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignIn.setOnClickListener(this);
-
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(this);
-
         txtForgotPassword = (TextView) findViewById(R.id.txtForgot);
         txtForgotPassword.setOnClickListener(this);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        fAuth =  FirebaseAuth.getInstance();
 
         //Remember me
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
@@ -111,10 +109,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        fAuth =  FirebaseAuth.getInstance();
-
         BiometricManager biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate(BIOMETRIC_STRONG | DEVICE_CREDENTIAL)) {
             case BiometricManager.BIOMETRIC_SUCCESS:
@@ -141,7 +135,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             public void onAuthenticationError(int errorCode,
                                               @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                Toast.makeText(Login.this, "Log out", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -149,17 +142,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 startActivity(new Intent(Login.this, Display1.class));
-                Login.this.finish();
-                Toast.makeText(getApplicationContext(),
-                        "Login Successful!", Toast.LENGTH_SHORT).show();
+                Login.this.finishAffinity();
+                showToast("Sign in successfully");
             }
 
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
-                Toast.makeText(getApplicationContext(), "Login Failed!",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                showToast("Sign in failed");
             }
         });
 
@@ -177,6 +167,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         imgFingerprint.setOnClickListener(view -> {
             biometricPrompt.authenticate(promptInfo);
         });
+    }
+
+    private void showToast(String message){
+        Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
     }
 
     //set on click event
@@ -203,53 +197,40 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         if(email.isEmpty()){
             txtEmail.setError("Email is required");
             txtEmail.requestFocus();
-            return;
-        }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             txtEmail.setError("Email invalid");
             txtEmail.requestFocus();
-            return;
-        }
-
-        if(password.isEmpty()){
+        }else if(password.isEmpty()){
             txtPassword.setError("Password is required");
             txtPassword.requestFocus();
-            return;
-        }
-
-        if(password.length() < 6){
+        }else if(password.length() < 6){
             txtPassword.setError("Password must be bigger than 6 characters");
             txtPassword.requestFocus();
-            return;
-        }
-
-        progressBar.setVisibility(View.VISIBLE);
-        closeKeyboard();
-
-        fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if(task.isSuccessful()){
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    if(user.isEmailVerified()){
+        }else {
+            progressBar.setVisibility(View.VISIBLE);
+            closeKeyboard();
+            fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if(user.isEmailVerified()){
+                            progressBar.setVisibility(View.GONE);
+                            startActivity(new Intent(Login.this, Display1.class));
+                            finishAffinity();
+                        }
+                        else
+                        {
+                            showToast("Your account hasn't been verify yet");
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }else{
+                        showToast("Wrong Email or Password! Please try again");
                         progressBar.setVisibility(View.GONE);
-                        startActivity(new Intent(Login.this, Display1.class));
-                        finish();
                     }
-                    else
-                    {
-                        Toast.makeText(Login.this, "Your account hasn't been verify yet", Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
-                    }
-                }else{
-                    Toast.makeText(Login.this, "Wrong Email or Password! Please try again.", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override

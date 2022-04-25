@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:layout_gravity="center_vertical"
+    android:orientation="vertical"
     tools:context=".User.SignUp">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:paddingStart="5dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -36,11 +47,12 @@
             android:background="@drawable/round_text2"
             android:ems="10"
             android:hint="Your full name"
+            android:textColorHint="#999999"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:padding="10dp"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/txtEmail"
@@ -52,10 +64,12 @@
             android:background="@drawable/round_text2"
             android:ems="10"
             android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#999999"
             android:minHeight="48dp"
             android:padding="10dp"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/txtPassword"
@@ -67,11 +81,12 @@
             android:background="@drawable/round_text2"
             android:ems="10"
             android:hint="Password"
+            android:textColorHint="#999999"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="10dp"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/PasswordAgain"
@@ -83,11 +98,12 @@
             android:background="@drawable/round_text2"
             android:ems="10"
             android:hint="Enter password again"
+            android:textColorHint="#999999"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="10dp"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnSignUp"

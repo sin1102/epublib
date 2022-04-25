@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,11 +31,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
     private EditText txtFullname, txtPassword, txtPasswordAgain, txtEmail;
     private Button btnSignUp;
+    private ImageButton btnBack;
     private ProgressBar progressBar;
     private FirebaseAuth fAuth;
     private String userID;
     private FirebaseFirestore fStore;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +49,23 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(this);
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(this);
 
         progressBar = findViewById(R.id.progressBar);
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
+    }
+
+    private void showToast(String message){
+        Toast.makeText(SignUp.this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
+            case R.id.btnBack:
+                startActivity(new Intent(SignUp.this, Login.class));
+                finish();
+                break;
             case R.id.btnSignUp:
                 registerUser();
                 break;
@@ -73,81 +82,57 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         if(fullname.isEmpty()){
             txtFullname.setError("Full name is required");
             txtFullname.requestFocus();
-            return;
-        }
-
-        if(email.isEmpty()){
+        }else if(email.isEmpty()){
             txtEmail.setError("Email is required");
             txtEmail.requestFocus();
-            return;
-        }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             txtEmail.setError("Email invalid");
             txtEmail.requestFocus();
-            return;
-        }
-
-        if(password.isEmpty()){
+        }else if(password.isEmpty()){
             txtPassword.setError("Password is required");
             txtPassword.requestFocus();
-            return;
-        }
-
-        if(password.length() < 6){
+        }else if(password.length() < 6){
             txtPassword.setError("Password must be bigger than 6 characters");
             txtPassword.requestFocus();
-            return;
-        }
-
-        if(!passwordAgain.equals(password)){
+        }else if(!passwordAgain.equals(password)){
             txtPasswordAgain.setError("Password not match");
             txtPasswordAgain.requestFocus();
-            return;
-        }
-
-        progressBar.setVisibility(View.VISIBLE);
-        closeKeyboard();
-
-        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(task.isSuccessful()){
-                    userID = fAuth.getCurrentUser().getUid();
-                    DocumentReference documentReference = fStore.collection("Users").document(userID);
-
-                    Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("fullname", fullname);
-                    userMap.put("email", email);
-                    documentReference.set(userMap);
-                    progressBar.setVisibility(View.GONE);
-
-
-//                    HashMap<String, String> userMap = new HashMap<>();
-//
-//                    userMap.put("name", fullname);
-//                    userMap.put("email", email);
-//
-//                    root.push().setValue(userMap);
-
-                    if(user.isEmailVerified()){
-                        Toast.makeText(SignUp.this, "Email has been registerd", Toast.LENGTH_SHORT).show();
+        }else{
+            progressBar.setVisibility(View.VISIBLE);
+            closeKeyboard();
+            fAuth = FirebaseAuth.getInstance();
+            fStore = FirebaseFirestore.getInstance();
+            fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if(task.isSuccessful()){
+                        userID = fAuth.getCurrentUser().getUid();
+                        DocumentReference documentReference = fStore.collection("Users").document(userID);
+                        Map<String, Object> userMap = new HashMap<>();
+                        userMap.put("fullname", fullname);
+                        userMap.put("email", email);
+                        documentReference.set(userMap);
                         progressBar.setVisibility(View.GONE);
+                        if(user.isEmailVerified()){
+                            showToast("Email has been registered");
+                            progressBar.setVisibility(View.GONE);
+                        }
+                        else{
+                            user.sendEmailVerification();
+                            startActivity(new Intent(SignUp.this, Login.class));
+                            showToast("Please check your email to verify your account");
+                            finishAffinity();
+                            progressBar.setVisibility(View.GONE);
+                        }
                     }
                     else{
-                        user.sendEmailVerification();
-                        startActivity(new Intent(SignUp.this, Login.class));
-                        Toast.makeText(SignUp.this, "Email has been sent. Please check your email to verify your account", Toast.LENGTH_SHORT).show();
-                        finish();
+                        showToast("Email has already existed");
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
-                else{
-                    Toast.makeText(SignUp.this, "Register Failed", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                }
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -155,7 +140,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         super.onResume();
         progressBar.setVisibility(View.GONE);
     }
-
 
     private void closeKeyboard() {
         View view = this.getCurrentFocus();
