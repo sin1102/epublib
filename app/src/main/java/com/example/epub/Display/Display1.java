@@ -140,8 +140,6 @@ public class Display1 extends SideBar {
             }
         });
 
-
-
         FloatingActionButton fab = findViewById(R.id.fab_btn);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,10 +152,8 @@ public class Display1 extends SideBar {
                 intent.setType("*/*");
                 intent = Intent.createChooser(intent, "Choose Books");
                 startActivityForResult(intent, 2);
-
             }
         });
-
     }
 
     protected void onStart() {
@@ -179,7 +175,6 @@ public class Display1 extends SideBar {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 

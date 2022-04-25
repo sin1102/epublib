@@ -22,7 +22,6 @@ import com.example.epub.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,20 +35,17 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements View.OnClickListener {
 
-    //Declare variable
+    private EditText txtUsername, txtEmail;
+    private ImageView imageUser;
+    private TextView btnUpdate;
+    private ImageView btnTurnback;
+    private ProgressBar progressBar;
 
-    EditText txtUsername, txtEmail;
-    ImageView imageUser;
-    TextView btnUpdate;
-    ImageView btnTurnback;
-    ProgressBar progressBar;
-
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
-    FirebaseUser fUser;
-    StorageReference storageReference;
+    private FirebaseAuth fAuth;
+    private FirebaseFirestore fStore;
+    private StorageReference storageReference;
 
     String userID;
 
@@ -58,15 +54,69 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar4);
+        imageUser = (ImageView) findViewById(R.id.imageUser);
+        txtUsername = (EditText) findViewById(R.id.txtUsername);
+        txtEmail = (EditText) findViewById(R.id.txtEmail);
+        btnUpdate = (TextView) findViewById(R.id.btnUpdate);
+        btnTurnback = (ImageView) findViewById(R.id.btnTurnback);
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
-        fUser = fAuth.getCurrentUser();
         userID = fAuth.getCurrentUser().getUid();
 
+        displayProfile();
 
-        //Load image from Storage
-        StorageReference profileRef =storageReference.child("Users/" + fAuth.getCurrentUser().getUid() + "/profile.jpg");
+        btnUpdate.setOnClickListener(this);
+        imageUser.setOnClickListener(this);
+        btnTurnback.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnTurnback:
+                startActivity(new Intent(Profile.this, Display1.class));
+                finishAffinity();
+                break;
+            case R.id.btnUpdate:
+                updateProfile();
+                break;
+            case R.id.imageUser:
+                Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGallery, 10);
+                break;
+        }
+    }
+
+    private void updateProfile(){
+        String name = txtUsername.getText().toString().trim();
+        String email = txtEmail.getText().toString().trim();
+        if(name.isEmpty()){
+            txtUsername.setError("Please enter your full name");
+            txtUsername.requestFocus();
+        }
+        else
+        {
+            DocumentReference documentReference = fStore.collection("Users").document(userID);
+            Map<String, Object> edited = new HashMap<>();
+            edited.put("fullname", name);
+            edited.put("email", email);
+            progressBar.setVisibility(View.VISIBLE);
+            closeKeyboard();
+            documentReference.set(edited).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(Profile.this, "Your profile has been updated", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+        }
+    }
+
+    private void displayProfile(){
+        StorageReference profileRef = storageReference.child("Users/" + fAuth.getCurrentUser().getUid() + "/profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -82,66 +132,6 @@ public class Profile extends AppCompatActivity {
                 txtEmail.setText(value.getString("email"));
             }
         });
-
-        //Register view
-        progressBar = (ProgressBar) findViewById(R.id.progressBar4);
-        imageUser = (ImageView) findViewById(R.id.imageUser);
-
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-
-        btnUpdate = (TextView) findViewById(R.id.btnUpdate);
-
-        //Set on click event for Button btnUpdate
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                closeKeyboard();
-                if(txtUsername.getText().toString().isEmpty()){
-                    txtUsername.setError("Please enter your full name");
-                    txtUsername.requestFocus();
-                    progressBar.setVisibility(View.GONE);
-                    return;
-                }
-                else
-                {
-                    DocumentReference docRef = fStore.collection("Users").document(userID);
-                    Map<String, Object> edited = new HashMap<>();
-                    edited.put("fullname", txtUsername.getText().toString());
-                    edited.put("email", txtEmail.getText().toString());
-                    documentReference.set(edited).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(Profile.this, "Your profile has been updated", Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
-                    });
-                }
-            }
-        });
-
-
-        //Open Gallery
-        imageUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGallery, 10);
-            }
-        });
-
-        //Tool bar turn back
-        btnTurnback = (ImageView) findViewById(R.id.btnTurnback);
-        btnTurnback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Display1.class));
-                finishAffinity();
-            }
-        });
-
-
     }
 
     @Override

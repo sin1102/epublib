@@ -39,7 +39,6 @@ import java.util.concurrent.Executor;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
-    //Declare variable
     private static final int REQUEST_CODE = 101010;
     private ImageView imgFingerprint;
     private Executor executor;
@@ -81,10 +80,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         if(checkbox.equals("true")){
             startActivity(new Intent(Login.this, Display1.class));
-            finish();
+            finishAffinity();
         }
         else if(checkbox.equals("false")){
-
         }
 
         cbRememberMe = (CheckBox) findViewById(R.id.cbRememberMe);

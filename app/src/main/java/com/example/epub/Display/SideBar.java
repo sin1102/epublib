@@ -168,8 +168,7 @@ public class SideBar extends AppCompatActivity implements  NavigationView.OnNavi
                 editor.apply();
 
                 startActivity(new Intent(this, Login.class));
-                fAuth.signOut();
-                this.finish();
+                this.finishAffinity();
                 break;
             default:
                 return true;
