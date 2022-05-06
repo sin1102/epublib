@@ -2,6 +2,7 @@ package com.example.epub.Display;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -44,8 +45,10 @@ public class UploadedBookDisplay extends SideBar {
     @Override
     protected void onCreate (Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_uploaded_book);
-
+//        setContentView(R.layout.activity_uploaded_book);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.activity_uploaded_book, null, false);
+        mDrawerLayout.addView(v, 1);
 
         rcvUploadedBook = (RecyclerView)findViewById(R.id.rcv_uploaded_book);
         linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
