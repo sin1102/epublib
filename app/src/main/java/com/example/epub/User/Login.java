@@ -59,8 +59,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Fingerprint
-        imgFingerprint = findViewById(R.id.imgFingerprint);
+
 
         //Register view
         txtEmail = (EditText) findViewById(R.id.txtEmail);
@@ -162,9 +161,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         // if needed by your app.
 
 
-        imgFingerprint.setOnClickListener(view -> {
-            biometricPrompt.authenticate(promptInfo);
-        });
+
     }
 
     private void showToast(String message){

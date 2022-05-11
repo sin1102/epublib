@@ -118,13 +118,7 @@
             android:text="Sign up"
             android:textColor="@color/white" />
 
-        <ImageView
-            android:id="@+id/imgFingerprint"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_baseline_fingerprint_24"
-            />
+
 
     </LinearLayout>
 
